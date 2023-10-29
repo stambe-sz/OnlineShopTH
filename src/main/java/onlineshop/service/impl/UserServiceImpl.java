@@ -28,8 +28,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserServiceModel editUser(UserServiceModel userServiceModel) {
         User user = this.findUser(userServiceModel.getId());
-        User editUser = this.map(user, userServiceModel);
-        editUser = this.userRepository.save(editUser);
+        User editUser = this.mapUser(user, userServiceModel);
+        this.userRepository.save(editUser);
         return modelMapper.map(editUser, UserServiceModel.class);
     }
 
@@ -57,8 +57,7 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    private User map(User user, UserServiceModel userServiceModel) {
-        user.setId(userServiceModel.getId());
+    private User mapUser(User user, UserServiceModel userServiceModel) {
         user.setRole(userServiceModel.getRole());
         user.setEmail(userServiceModel.getEmail());
         user.setPassword(userServiceModel.getPassword());

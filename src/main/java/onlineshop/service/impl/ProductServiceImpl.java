@@ -18,7 +18,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductServiceModel addProduct(ProductServiceModel productServiceModel) {
-        Product product = new Product();
+        Product product = modelMapper.map(productServiceModel,Product.class);
         Product savedProduct = this.productRepository.save(product);
         return modelMapper.map(savedProduct, ProductServiceModel.class);
     }
@@ -27,6 +27,7 @@ public class ProductServiceImpl implements ProductService {
     public ProductServiceModel editProduct(ProductServiceModel productServiceModel) {
         Product productFound = this.findProductById(productServiceModel.getId());
         Product editProduct = this.mapProduct(productFound,productServiceModel);
+        this.productRepository.save(editProduct);
         return modelMapper.map(editProduct, ProductServiceModel.class);
     }
     @Override
@@ -50,7 +51,6 @@ public class ProductServiceImpl implements ProductService {
         return product;
     }
     private Product mapProduct(Product productFound, ProductServiceModel productServiceModel) {
-        productFound.setId(productServiceModel.getId());
         productFound.setProductCondition(productServiceModel.getProductCondition());
         productFound.setName(productServiceModel.getName());
         productFound.setQuantity(productServiceModel.getQuantity());
