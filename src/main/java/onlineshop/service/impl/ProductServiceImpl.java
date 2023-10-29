@@ -25,25 +25,37 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductServiceModel editProduct(ProductServiceModel productServiceModel) {
-        return null;
+        Product productFound = this.findProductById(productServiceModel.getId());
+        Product editProduct = map(productFound,productServiceModel);
+        return modelMapper.map(editProduct, ProductServiceModel.class);
     }
-
     @Override
     public boolean deleteProductById(long productId) {
-        return false;
+        Product product = this.findProductById(productId);
+        this.productRepository.delete(product);
+        return true;
     }
 
     @Override
     public ProductServiceModel getProductById(long productId) {
-        return null;
+        Product product = this.productRepository.findById(productId).orElse(null);
+        return modelMapper.map(product, ProductServiceModel.class);
     }
 
     private Product findProductById(long id) {
-
         Product product = this.productRepository.findById(id).orElse(null);
         if (product == null) {
             throw new NoSuchElementException();
         }
         return product;
+    }
+    private Product map(Product productFound, ProductServiceModel productServiceModel) {
+        productFound.setId(productServiceModel.getId());
+        productFound.setProductCondition(productServiceModel.getProductCondition());
+        productFound.setName(productServiceModel.getName());
+        productFound.setQuantity(productServiceModel.getQuantity());
+        productFound.setCategory(productServiceModel.getCategory());
+        productFound.setDescription(productServiceModel.getDescription());
+        return productFound;
     }
 }
