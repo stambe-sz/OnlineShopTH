@@ -24,6 +24,6 @@ public class Product extends BaseEntity {
     private int quantity;
     @OneToMany
     private List<Category> category;
-    @Column
-    private String condition;
+    @Column(name = "product_condition")
+    private String productCondition;
 }
