@@ -26,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductServiceModel editProduct(ProductServiceModel productServiceModel) {
         Product productFound = this.findProductById(productServiceModel.getId());
-        Product editProduct = map(productFound,productServiceModel);
+        Product editProduct = this.mapProduct(productFound,productServiceModel);
         return modelMapper.map(editProduct, ProductServiceModel.class);
     }
     @Override
@@ -49,7 +49,7 @@ public class ProductServiceImpl implements ProductService {
         }
         return product;
     }
-    private Product map(Product productFound, ProductServiceModel productServiceModel) {
+    private Product mapProduct(Product productFound, ProductServiceModel productServiceModel) {
         productFound.setId(productServiceModel.getId());
         productFound.setProductCondition(productServiceModel.getProductCondition());
         productFound.setName(productServiceModel.getName());
