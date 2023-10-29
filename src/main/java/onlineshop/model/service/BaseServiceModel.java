@@ -9,6 +9,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public abstract class BaseServiceModel {
 
-    private Long id;
+    private long id;
 
 }
