@@ -25,7 +25,9 @@ public class Order extends BaseEntity{
     private LocalDateTime createdAt;
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+    @Column
     private String status;
+    @Column
     private String note;
     @OneToMany
     private List<Product> products;

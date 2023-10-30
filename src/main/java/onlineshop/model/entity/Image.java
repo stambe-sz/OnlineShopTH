@@ -2,6 +2,7 @@ package onlineshop.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,8 +14,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "roles")
-public class Role extends BaseEntity {
+@Table(name = "images")
+public class Image extends BaseEntity{
     @Column
-    private String name;
+    private String imageUrl;
+    @ManyToOne
+    private Product product;
 }

@@ -9,11 +9,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@MappedSuperclass
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@MappedSuperclass
 public abstract class BaseEntity {
 
     @Id
