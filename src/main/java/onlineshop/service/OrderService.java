@@ -8,11 +8,11 @@ public interface OrderService {
 
     boolean create(OrderServiceModel inputOrder);
 
-    boolean updateById(String orderId);
+    boolean updateById(long orderId);
 
     boolean updateByOrderNumber(String numberOfOrder);
 
-    boolean deleteById(String orderId);
+    boolean deleteById(long orderId);
 
     List<OrderServiceModel> getAll();
 }
