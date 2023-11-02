@@ -1,9 +1,6 @@
 package onlineshop.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +26,8 @@ public class Order extends BaseEntity{
     private String status;
     @Column
     private String note;
+    @ManyToOne
+    private User user;
     @OneToMany
     private List<Product> products;
 

@@ -2,8 +2,7 @@ package onlineshop.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import onlineshop.model.entity.Order;
-import onlineshop.model.entity.Product;
-import onlineshop.model.repository.OrderRepository;
+import onlineshop.repository.OrderRepository;
 import onlineshop.model.service.OrderServiceModel;
 import onlineshop.service.OrderService;
 import org.modelmapper.ModelMapper;
@@ -28,22 +27,24 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean updateById(long orderId) {
-        return false;
+    public OrderServiceModel updateById(long orderId) {
+        return null;
     }
-
-    @Override
-    public boolean updateByOrderNumber(String numberOfOrder) {
-        return false;
-    }
-
     @Override
     public boolean deleteById(long orderId) {
         Order order = this.findOrderById(orderId);
         this.orderRepository.delete(order);
         return true;
     }
-    //findMyOrders
+    @Override
+    public OrderServiceModel findMyOrders(long userId){
+        Order order = this.orderRepository.findOrderByUserId(userId).orElse(null);
+        if (order == null){
+            throw new NoSuchElementException();
+        }
+        return modelMapper.map(order, OrderServiceModel.class);
+    }
+
     @Override
     public List<OrderServiceModel> getAll() {
         List<Order> foundOrders = this.orderRepository.findAll();

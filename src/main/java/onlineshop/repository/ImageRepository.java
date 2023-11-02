@@ -1,4 +1,4 @@
-package onlineshop.model.repository;
+package onlineshop.repository;
 
 import onlineshop.model.entity.Image;
 import org.springframework.data.jpa.repository.JpaRepository;

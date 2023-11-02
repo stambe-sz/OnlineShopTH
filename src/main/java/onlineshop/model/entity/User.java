@@ -24,6 +24,8 @@ public class User extends BaseEntity {
     private String email;
     @Column(nullable = false)
     private String password;
+    @Column
+    private String address;
     @OneToOne
     private Role role;
 }

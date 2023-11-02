@@ -2,7 +2,7 @@ package onlineshop.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import onlineshop.model.entity.User;
-import onlineshop.model.repository.UserRepository;
+import onlineshop.repository.UserRepository;
 import onlineshop.model.service.UserServiceModel;
 import onlineshop.service.UserService;
 import org.modelmapper.ModelMapper;
