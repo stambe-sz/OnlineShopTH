@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -18,6 +20,12 @@ import lombok.Setter;
 public class Image extends BaseEntity{
     @Column
     private String imageUrl;
+    @Column
+    private BigDecimal size;
+    @Column
+    private String description;
+    @Column
+    private String contentType;
     @ManyToOne
     private Product product;
 }
