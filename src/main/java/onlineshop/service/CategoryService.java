@@ -2,19 +2,12 @@ package onlineshop.service;
 
 import onlineshop.model.service.CategoryServiceModel;
 
-import java.util.List;
-
 public interface CategoryService {
-
     CategoryServiceModel getById(Long id);
 
-    CategoryServiceModel getByName(String name);
+    boolean createCategory(CategoryServiceModel category);
 
-    List<CategoryServiceModel> getAll();
+    boolean updateCategory(CategoryServiceModel category);
 
-    boolean create(CategoryServiceModel inputCategory);
-
-    boolean update(CategoryServiceModel newCategory);
-
-    boolean deleteById(Long id);
+    boolean deleteCategoryById(Long id);
 }

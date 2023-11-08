@@ -1,39 +1,30 @@
 package onlineshop.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import onlineshop.model.service.CategoryServiceModel;
 import onlineshop.service.CategoryService;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
-
+@Service
+@RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
-
     @Override
     public CategoryServiceModel getById(Long id) {
         return null;
     }
 
     @Override
-    public CategoryServiceModel getByName(String name) {
-        return null;
-    }
-
-    @Override
-    public List<CategoryServiceModel> getAll() {
-        return null;
-    }
-
-    @Override
-    public boolean create(CategoryServiceModel inputCategory) {
+    public boolean createCategory(CategoryServiceModel category) {
         return false;
     }
 
     @Override
-    public boolean update(CategoryServiceModel newCategory) {
+    public boolean updateCategory(CategoryServiceModel category) {
         return false;
     }
 
     @Override
-    public boolean deleteById(Long id) {
+    public boolean deleteCategoryById(Long id) {
         return false;
     }
 }
