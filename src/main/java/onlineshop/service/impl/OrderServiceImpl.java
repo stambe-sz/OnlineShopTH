@@ -27,17 +27,17 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderServiceModel updateById(long orderId) {
+    public OrderServiceModel updateById(Long orderId) {
         return null;
     }
     @Override
-    public boolean deleteById(long orderId) {
+    public boolean deleteById(Long orderId) {
         Order order = this.findOrderById(orderId);
         this.orderRepository.delete(order);
         return true;
     }
     @Override
-    public OrderServiceModel findMyOrders(long userId){
+    public OrderServiceModel findMyOrders(Long userId){
         Order order = this.orderRepository.findOrderByUserId(userId).orElse(null);
         if (order == null){
             throw new NoSuchElementException();
@@ -52,7 +52,7 @@ public class OrderServiceImpl implements OrderService {
                 .map(order -> modelMapper.map(order, OrderServiceModel.class))
                 .collect(Collectors.toList());
     }
-    private Order findOrderById(long orderId) {
+    private Order findOrderById(Long orderId) {
         Order order = this.orderRepository.findById(orderId).orElse(null);
         if (order == null){
             throw new NoSuchElementException();

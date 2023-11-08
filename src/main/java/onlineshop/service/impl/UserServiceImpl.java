@@ -42,14 +42,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean deleteUserById(long userId) {
+    public boolean deleteUserById(Long userId) {
         User user = this.findUser(userId);
         this.userRepository.delete(user);
         return true;
         //TODO deleteUserById(long userId)...
     }
 
-    private User findUser(long id) {
+    private User findUser(Long id) {
         User user = this.userRepository.findById(id).orElse(null);
         if (user == null) {
             throw new NoSuchElementException();

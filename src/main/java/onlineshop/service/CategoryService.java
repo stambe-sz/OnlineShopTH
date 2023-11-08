@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CategoryService {
 
-    CategoryServiceModel getById(String id);
+    CategoryServiceModel getById(Long id);
 
     CategoryServiceModel getByName(String name);
 
@@ -16,5 +16,5 @@ public interface CategoryService {
 
     boolean update(CategoryServiceModel newCategory);
 
-    boolean deleteById(String id);
+    boolean deleteById(Long id);
 }

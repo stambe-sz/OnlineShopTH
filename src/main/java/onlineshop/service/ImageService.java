@@ -5,9 +5,9 @@ import onlineshop.model.service.ImageServiceModel;
 public interface ImageService {
     boolean addImage(ImageServiceModel imageServiceModel);
 
-    ImageServiceModel updateImage(long imageId);
+    ImageServiceModel updateImage(Long imageId);
 
-    ImageServiceModel deleteImage(long imageId);
+    ImageServiceModel deleteImage(Long imageId);
 
-    ImageServiceModel findAllMyImages(long userId);
+    ImageServiceModel findAllMyImages(Long userId);
 }

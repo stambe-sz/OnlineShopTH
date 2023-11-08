@@ -8,7 +8,7 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
 
     @Override
-    public CategoryServiceModel getById(String id) {
+    public CategoryServiceModel getById(Long id) {
         return null;
     }
 
@@ -33,7 +33,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public boolean deleteById(String id) {
+    public boolean deleteById(Long id) {
         return false;
     }
 }

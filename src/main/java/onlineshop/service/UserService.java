@@ -7,6 +7,6 @@ public interface UserService {
     UserServiceModel register(UserServiceModel userServiceModel);
     UserServiceModel editUser(UserServiceModel userServiceModel);
     UserServiceModel getUserById(Long userId);
-    boolean deleteUserById(long userId);
+    boolean deleteUserById(Long userId);
 
 }

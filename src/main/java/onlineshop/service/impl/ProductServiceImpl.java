@@ -31,19 +31,19 @@ public class ProductServiceImpl implements ProductService {
         return modelMapper.map(editProduct, ProductServiceModel.class);
     }
     @Override
-    public boolean deleteProductById(long productId) {
+    public boolean deleteProductById(Long productId) {
         Product product = this.findProductById(productId);
         this.productRepository.delete(product);
         return true;
     }
 
     @Override
-    public ProductServiceModel getProductById(long productId) {
+    public ProductServiceModel getProductById(Long productId) {
         Product product = this.productRepository.findById(productId).orElse(null);
         return modelMapper.map(product, ProductServiceModel.class);
     }
 
-    private Product findProductById(long id) {
+    private Product findProductById(Long id) {
         Product product = this.productRepository.findById(id).orElse(null);
         if (product == null) {
             throw new NoSuchElementException();
