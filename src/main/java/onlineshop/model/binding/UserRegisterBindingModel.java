@@ -12,7 +12,7 @@ import onlineshop.model.entity.Role;
 @Setter
 @NoArgsConstructor
 public class UserRegisterBindingModel {
-    private Long id;
+
     @Size(min = 3,max = 20,message = "Username length must be between 3 and 20 characters")
     private String username;
     @Size(min = 3,max = 20,message = "First name length must be between 3 and 20 characters")
@@ -23,5 +23,5 @@ public class UserRegisterBindingModel {
     private String password;
     @Size(min = 10,max = 100,message = "Address length must be between 3 and 20 characters")
     private String address;
-    private Role role;
+
 }

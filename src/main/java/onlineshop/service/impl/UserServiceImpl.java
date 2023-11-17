@@ -1,7 +1,10 @@
 package onlineshop.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import onlineshop.enums.RoleEnum;
+import onlineshop.model.entity.Role;
 import onlineshop.model.entity.User;
+import onlineshop.repository.RoleRepository;
 import onlineshop.repository.UserRepository;
 import onlineshop.model.service.UserServiceModel;
 import onlineshop.service.UserService;
@@ -15,11 +18,22 @@ import java.util.NoSuchElementException;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final ModelMapper modelMapper;
 
     @Override
     public UserServiceModel register(UserServiceModel userServiceModel) {
         User user = modelMapper.map(userServiceModel, User.class);
+        //TODO BCryptPasswordEncoder !!!
+        if (this.userRepository.count() == 0){
+            Role roleAdmin =
+                    this.roleRepository.findByName(RoleEnum.ADMIN.name());
+            user.setRole(roleAdmin);
+        } else {
+            Role roleUser =
+                    this.roleRepository.findByName(RoleEnum.USER.name());
+            user.setRole(roleUser);
+        }
         User savedUser = this.userRepository.save(user);
         return modelMapper.map(savedUser, UserServiceModel.class);
         //TODO register(UserServiceModel userServiceModel) ...

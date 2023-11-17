@@ -26,6 +26,6 @@ public class User extends BaseEntity {
     private String password;
     @Column
     private String address;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Role role;
 }

@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "carts")
-public class CartEntity extends BaseEntity{
+public class Cart extends BaseEntity{
     @ManyToOne
     private User user;
     @OneToMany

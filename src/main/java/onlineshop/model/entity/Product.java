@@ -26,6 +26,6 @@ public class Product extends BaseEntity {
     private List<Category> category;
     @Column(name = "product_condition")
     private String productCondition;
-    @OneToMany
-    private List<Image> images;
+    @ElementCollection
+    private List<String> images;
 }
