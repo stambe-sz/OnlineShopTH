@@ -6,7 +6,8 @@ public enum CategoryEnum {
 
     CLOTHES (new Category("Clothes")),
     FOODS(new Category("Foods")),
-    DRINKS(new Category("Drinks"));
+    DRINKS(new Category("Drinks")),
+    HOUSEHOLD(new Category("Household"));
 
     private Category category;
 
