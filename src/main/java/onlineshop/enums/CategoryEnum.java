@@ -4,9 +4,9 @@ import onlineshop.model.entity.Category;
 
 public enum CategoryEnum {
 
-    CLOTHES (new Category(
-            "Clothes",
-            "All for the clothes"));
+    CLOTHES (new Category("Clothes")),
+    FOODS(new Category("Foods")),
+    DRINKS(new Category("Drinks"));
 
     private Category category;
 

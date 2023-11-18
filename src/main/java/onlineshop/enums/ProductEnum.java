@@ -12,8 +12,7 @@ public enum ProductEnum {
             "Long Jeans",
             10,
             List.of(new Category(
-                    CategoryEnum.CLOTHES.getCategory().getCategoryName(),
-                    CategoryEnum.CLOTHES.getCategory().getDescription())
+                    CategoryEnum.CLOTHES.getCategory().getCategoryName())
             ),
             ProductConditionEnum.NEW.name(),
             List.of("https://", "https://", "https://")

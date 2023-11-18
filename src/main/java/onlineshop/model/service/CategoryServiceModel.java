@@ -11,5 +11,4 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CategoryServiceModel {
     private String categoryName;
-    private String description;
 }
