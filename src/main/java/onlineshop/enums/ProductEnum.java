@@ -17,7 +17,18 @@ public enum ProductEnum {
             ),
             ProductConditionEnum.NEW.name(),
             List.of("https://", "https://", "https://")
-    ));
+    )),
+    PRODUCT_2(new Product(
+            "T-shirt",
+            "cotton",
+            5,
+            List.of(new Category(
+                    CategoryEnum.
+            )))),
+    PRODUCT_3(new Product()),
+    PRODUCT_4(new Product()),
+    PRODUCT_5(new Product());
+
 
     private Product product;
 
