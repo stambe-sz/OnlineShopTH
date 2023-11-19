@@ -46,7 +46,7 @@ public enum ProductEnum {
                     CategoryEnum.HOUSEHOLD.getCategory().getCategoryName()
             )),
             ProductConditionEnum.NEW.name(),
-            List.of(""))),
+            List.of("https://media-cldnry.s-nbcnews.com/image/upload/newscms/2019_20/1437444/knife-ode-today-main-190515.jpg"))),
     PRODUCT_5(new Product(
             "Brandy",
             "alcoholic drink",
@@ -55,12 +55,11 @@ public enum ProductEnum {
                     CategoryEnum.DRINKS.getCategory().getCategoryName()
             )),
             ProductConditionEnum.NEW.name(),
-            List.of("")));
+            List.of("https://seewines.com/uploads/images/products/grozdova-rakija-min.png")));
 
+    private final Product product;
 
-    private Product product;
-
-    private ProductEnum(Product product) {
+    ProductEnum(Product product) {
         this.product = product;
     }
 

@@ -22,7 +22,7 @@ public class Product extends BaseEntity {
     private String description;
     @Column(nullable = false)
     private int quantity;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Category> category;
     @Column(name = "product_condition")
     private String productCondition;
