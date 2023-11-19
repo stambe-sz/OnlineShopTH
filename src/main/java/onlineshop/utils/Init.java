@@ -18,12 +18,14 @@ import org.springframework.stereotype.Component;
 public class Init {
 
     private final RoleRepository roleRepository;
+    private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
 
     @PostConstruct
     void loadData() {
         this.loadRoles();
-        this.loadProducts();
+        this.loadCategories();
+        //this.loadProducts();
     }
     private void loadProducts() {
         if (this.productRepository.count() == 0) {
@@ -46,6 +48,16 @@ public class Init {
             for (int i = 0; i < RoleEnum.values().length; i++) {
                 role = new Role(RoleEnum.values()[i].name());
                 this.roleRepository.save(role);
+            }
+        }
+    }
+
+    private void loadCategories() {
+        if (this.categoryRepository.count() == 0) {
+            Category category = null;
+            for (int i = 0; i < CategoryEnum.values().length; i++) {
+                category = new Category(CategoryEnum.values()[i].name());
+                this.categoryRepository.save(category);
             }
         }
     }

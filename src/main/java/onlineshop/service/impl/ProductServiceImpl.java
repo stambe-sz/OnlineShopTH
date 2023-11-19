@@ -1,7 +1,9 @@
 package onlineshop.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import onlineshop.model.entity.Category;
 import onlineshop.model.entity.Product;
+import onlineshop.repository.CategoryRepository;
 import onlineshop.repository.ProductRepository;
 import onlineshop.model.service.ProductServiceModel;
 import onlineshop.service.ProductService;
@@ -14,11 +16,17 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
+    //todo categoryService
     private final ModelMapper modelMapper;
 
     @Override
     public ProductServiceModel addProduct(ProductServiceModel productServiceModel) {
+        //TODO check if product exists
         Product product = modelMapper.map(productServiceModel,Product.class);
+        String categoryName = productServiceModel.getCategory().getCategoryName();
+        Category foundCategory = this.categoryRepository.findByCategoryName(categoryName);
+        product.setCategory(foundCategory);
         Product savedProduct = this.productRepository.save(product);
         return modelMapper.map(savedProduct, ProductServiceModel.class);
     }

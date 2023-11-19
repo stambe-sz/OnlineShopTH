@@ -9,23 +9,56 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </head>
   <body class="p-3 m-0 border-10 m-0 border-0">
-    <header class="row">
-        <nav class="nav nav-pills nav-fill col-3" style="inline-size: auto;">
-            <button class="btn-bd-light rounded m-2" type="button">Home</button>
-            <button class="btn-bd-light rounded m-2" type="button">Add product</button>
-            <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
-            
-            <a class="nav-link active m-2" href="#">Login</a>
-            <a class="nav-link active m-2" href="#">Register</a>
-            <a class="nav-link active m-2" href="#">Logout</a>
-
-            
-            <form class="d-flex p-2 ms-auto" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-            
+    <header class="row justify-content-center">
+        <nav class="nav nav-pills nav-fill text-center">
+          <ul class="nav-ul col-10">
+            <li><a class="nav-item" href="#">Login</a></li>
+            <li><a class="nav-item" href="#">Register</a></li>
+            <li><a class="nav-item" href="#">Home</a></li>
+            <li><a class="nav-item" href="#">Add Product</a></li>
+            <li><a class="nav-item" href="#">Contact</a></li>
+            <div class="nav-item dropdown col-2">
+              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown button
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </div>
+        </ul>
           </nav>
     </header>
   </body>
 </html>
+<style>
+  * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+  }
+  .nav {
+      text-align: center;
+      padding: 2px;
+      background: #019101;
+  }
+  .nav-ul > li {
+      display: inline-block;
+  }
+  .nav-item {
+      color: white;
+      display: inline-block;
+      text-decoration: none;
+      padding: 2px 5px;
+      border-radius: 5px;
+      text-transform: uppercase;
+      transition: all .2s;
+  }
+
+  .nav-item:hover {
+      /* transform: rotate(7deg); */
+      color: rgb(244, 14, 22);
+      background: #019101;
+  }
+</style>

@@ -3,6 +3,7 @@ package onlineshop.web.controllers;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import onlineshop.model.binding.ProductAddBindingModel;
+import onlineshop.model.service.ProductServiceModel;
 import onlineshop.service.ProductService;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,9 @@ public class ProductController {
     }
     @PostMapping("/products/add")
     private String addProduct(@Valid ProductAddBindingModel productAddBindingModel){
-
+        productService.addProduct(modelMapper
+                .map(productAddBindingModel, ProductServiceModel.class));
+        return "redirect:home";
     }
 
 }

@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import onlineshop.model.entity.Category;
+import onlineshop.model.entity.Image;
 
 import java.util.List;
 @Getter
@@ -13,6 +14,7 @@ public class ProductServiceModel extends BaseServiceModel {
     private String name;
     private String description;
     private int quantity;
-    private List<Category> category;
+    private Category category;
     private String productCondition;
+    private List<Image> images;
 }

@@ -18,7 +18,7 @@ public class ProductAddBindingModel {
     private String name;
     private String description;
     private int quantity;
-    private List<Category> category;
+    private CategoryBindingModel category;
     private String productCondition;
     private List<String> images;
 }
