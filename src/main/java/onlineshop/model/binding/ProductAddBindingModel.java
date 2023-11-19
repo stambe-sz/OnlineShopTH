@@ -15,16 +15,10 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class ProductAddBindingModel {
-    @Column(nullable = false)
     private String name;
-    @Column
     private String description;
-    @Column(nullable = false)
     private int quantity;
-    @OneToMany(cascade = CascadeType.ALL)
     private List<Category> category;
-    @Column(name = "product_condition")
     private String productCondition;
-    @ElementCollection
     private List<String> images;
 }
