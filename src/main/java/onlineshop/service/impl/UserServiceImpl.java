@@ -9,6 +9,8 @@ import onlineshop.repository.UserRepository;
 import onlineshop.model.service.UserServiceModel;
 import onlineshop.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
@@ -79,5 +81,10 @@ public class UserServiceImpl implements UserService {
         user.setFirstName(userServiceModel.getFirstName());
         user.setLastName(userServiceModel.getLastName());
         return user;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
     }
 }
