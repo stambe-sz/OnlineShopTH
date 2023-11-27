@@ -1,5 +1,6 @@
 package onlineshop.service;
 
+import onlineshop.model.entity.Category;
 import onlineshop.model.service.CategoryServiceModel;
 
 public interface CategoryService {
@@ -10,4 +11,6 @@ public interface CategoryService {
     boolean updateCategory(CategoryServiceModel category);
 
     boolean deleteCategoryById(Long id);
+
+    Category findCategoryByName(String categoryName);
 }

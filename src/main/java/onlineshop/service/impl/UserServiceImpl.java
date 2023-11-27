@@ -11,6 +11,7 @@ import onlineshop.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
@@ -21,12 +22,13 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ModelMapper modelMapper;
 
     @Override
     public UserServiceModel register(UserServiceModel userServiceModel) {
         User user = modelMapper.map(userServiceModel, User.class);
-        //TODO BCryptPasswordEncoder !!!
+        user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
         if (this.userRepository.count() == 0){
             Role roleAdmin =
                     this.roleRepository.findByName(RoleEnum.ADMIN.name());
@@ -38,7 +40,6 @@ public class UserServiceImpl implements UserService {
         }
         User savedUser = this.userRepository.save(user);
         return modelMapper.map(savedUser, UserServiceModel.class);
-        //TODO register(UserServiceModel userServiceModel) ...
     }
 
     @Override
@@ -62,7 +63,6 @@ public class UserServiceImpl implements UserService {
         User user = this.findUser(userId);
         this.userRepository.delete(user);
         return true;
-        //TODO deleteUserById(long userId)...
     }
 
     private User findUser(Long id) {
@@ -85,6 +85,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+        User foundUser = this.userRepository.findUserByUsername(username).orElse(null);
+        if (foundUser == null) {
+            //TODO
+        }
+        return foundUser;
     }
 }

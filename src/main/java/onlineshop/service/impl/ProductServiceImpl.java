@@ -6,6 +6,7 @@ import onlineshop.model.entity.Product;
 import onlineshop.repository.CategoryRepository;
 import onlineshop.repository.ProductRepository;
 import onlineshop.model.service.ProductServiceModel;
+import onlineshop.service.CategoryService;
 import onlineshop.service.ProductService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -16,16 +17,21 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
-    private final CategoryRepository categoryRepository;
+    private final CategoryService categoryService;
     //todo categoryService
     private final ModelMapper modelMapper;
 
     @Override
     public ProductServiceModel addProduct(ProductServiceModel productServiceModel) {
-        //TODO check if product exists
+        Product foundProduct = this.productRepository
+                .findProductByName(productServiceModel.getName()).orElse(null);
+        if (foundProduct != null){
+            //todo change exception
+            throw new IllegalArgumentException();
+        }
         Product product = modelMapper.map(productServiceModel,Product.class);
         String categoryName = productServiceModel.getCategory().getCategoryName();
-        Category foundCategory = this.categoryRepository.findByCategoryName(categoryName);
+        Category foundCategory = this.categoryService.findCategoryByName(categoryName);
         product.setCategory(foundCategory);
         Product savedProduct = this.productRepository.save(product);
         return modelMapper.map(savedProduct, ProductServiceModel.class);
