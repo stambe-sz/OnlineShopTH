@@ -5,15 +5,19 @@ import onlineshop.model.entity.Category;
 import onlineshop.model.service.CategoryServiceModel;
 import onlineshop.repository.CategoryRepository;
 import onlineshop.service.CategoryService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
+    private final ModelMapper modelMapper;
     @Override
     public CategoryServiceModel getById(Long id) {
-        return this.categoryRepository.f;
+        Category category = this.categoryRepository
+                .findCategoryById(id).orElse(null);
+        return modelMapper.map(category,CategoryServiceModel.class);
     }
 
     @Override

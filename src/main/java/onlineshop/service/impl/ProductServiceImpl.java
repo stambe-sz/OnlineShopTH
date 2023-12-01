@@ -18,7 +18,6 @@ import java.util.NoSuchElementException;
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final CategoryService categoryService;
-    //todo categoryService
     private final ModelMapper modelMapper;
 
     @Override
