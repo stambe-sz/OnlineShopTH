@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class OrderServiceModel {
+public class OrderServiceModel extends BaseServiceModel {
     private String numberOfOrder;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

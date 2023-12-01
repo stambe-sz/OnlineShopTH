@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoryServiceModel {
+public class CategoryServiceModel extends BaseServiceModel {
     private String categoryName;
 }

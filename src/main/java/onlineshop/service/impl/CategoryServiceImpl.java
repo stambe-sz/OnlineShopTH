@@ -31,17 +31,23 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public boolean updateCategory(CategoryServiceModel category) {
-        return false;
+    public boolean updateCategory(CategoryServiceModel categoryServiceModel) {
+        Category foundCategory = this.findCategoryById(categoryServiceModel.getId());
+        foundCategory.setCategoryName(categoryServiceModel.getCategoryName());
+        this.categoryRepository.saveAndFlush(foundCategory);
+        return true;
     }
     @Override
     public boolean deleteCategoryById(Long id) {
-        return false;
+        Category category = this.findCategoryById(id);
+        this.categoryRepository.delete(category);
+        return true;
     }
 
     @Override
     public Category findCategoryByName(String categoryName) {
-        return this.categoryRepository.findByCategoryName(categoryName).orElse(null);
+        return this.categoryRepository
+                .findByCategoryName(categoryName).orElse(null);
     }
 
     private Category findCategoryById(Long id) {

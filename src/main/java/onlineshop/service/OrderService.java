@@ -8,7 +8,7 @@ public interface OrderService {
 
     boolean create(OrderServiceModel inputOrder);
 
-    OrderServiceModel updateById(Long orderId);
+    OrderServiceModel update(OrderServiceModel ods);
 
     boolean deleteById(Long orderId);
 

@@ -27,8 +27,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderServiceModel updateById(Long orderId) {
-        return null;
+    public OrderServiceModel update(OrderServiceModel orderServiceModel) {
+        Order order = this.orderRepository.findById(orderServiceModel.getId()).orElse(null);
+        this.modelMapper.map(orderServiceModel, order);
+        this.orderRepository.saveAndFlush(order);
+        OrderServiceModel newOrder = modelMapper.map(order, OrderServiceModel.class);
+        return newOrder;
     }
     @Override
     public boolean deleteById(Long orderId) {
