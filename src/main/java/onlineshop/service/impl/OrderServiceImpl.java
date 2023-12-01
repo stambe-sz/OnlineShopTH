@@ -30,9 +30,9 @@ public class OrderServiceImpl implements OrderService {
     public OrderServiceModel update(OrderServiceModel orderServiceModel) {
         Order order = this.orderRepository.findById(orderServiceModel.getId()).orElse(null);
         this.modelMapper.map(orderServiceModel, order);
+        assert order != null;
         this.orderRepository.saveAndFlush(order);
-        OrderServiceModel newOrder = modelMapper.map(order, OrderServiceModel.class);
-        return newOrder;
+        return modelMapper.map(order, OrderServiceModel.class);
     }
     @Override
     public boolean deleteById(Long orderId) {
