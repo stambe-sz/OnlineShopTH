@@ -56,6 +56,7 @@ public class OrderServiceImpl implements OrderService {
         Order order = this.orderRepository.findById(orderId).orElse(null);
         if (order == null){
             throw new NoSuchElementException();
+            //todo change exception
         }
         return order;
     }

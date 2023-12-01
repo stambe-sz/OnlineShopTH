@@ -8,6 +8,8 @@ import onlineshop.service.CategoryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
+
 @Service
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
@@ -21,15 +23,17 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public boolean createCategory(CategoryServiceModel category) {
-        return false;
+    public boolean createCategory(CategoryServiceModel categoryServiceModel) {
+        Category category = modelMapper.map(categoryServiceModel,Category.class);
+        this.categoryRepository.save(category);
+        this.findCategoryById(category.getId());
+        return true;
     }
 
     @Override
     public boolean updateCategory(CategoryServiceModel category) {
         return false;
     }
-
     @Override
     public boolean deleteCategoryById(Long id) {
         return false;
@@ -38,5 +42,14 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Category findCategoryByName(String categoryName) {
         return this.categoryRepository.findByCategoryName(categoryName).orElse(null);
+    }
+
+    private Category findCategoryById(Long id) {
+        Category category = this.categoryRepository.findCategoryById(id).orElse(null);
+        if (category == null){
+            throw new NoSuchElementException();
+            //todo change exception
+        }
+        return category;
     }
 }
