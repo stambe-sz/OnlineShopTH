@@ -15,8 +15,8 @@ import java.util.List;
 @Entity
 @Table(name = "carts")
 public class Cart extends BaseEntity{
-    @ManyToOne
-    private User user;
+    @Column(name = "username")
+    private String username;
     @OneToMany
-    private List<Product> products;
+    private List<CartItem> cartItems;
 }

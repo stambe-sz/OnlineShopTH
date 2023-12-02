@@ -2,6 +2,7 @@ package onlineshop.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import onlineshop.enums.RoleEnum;
+import onlineshop.model.entity.Cart;
 import onlineshop.model.entity.Role;
 import onlineshop.model.entity.User;
 import onlineshop.repository.RoleRepository;
@@ -38,6 +39,7 @@ public class UserServiceImpl implements UserService {
                     this.roleRepository.findByName(RoleEnum.USER.name());
             user.setRole(roleUser);
         }
+        user.setCart(new Cart());
         User savedUser = this.userRepository.save(user);
         return modelMapper.map(savedUser, UserServiceModel.class);
     }
@@ -59,10 +61,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserServiceModel getUserByUsername(String username) {
+        User u = this.userRepository.findUserByUsername(username)
+                .orElse(null);
+        return this.modelMapper.map(u, UserServiceModel.class);
+    }
+
+    @Override
     public boolean deleteUserById(Long userId) {
         User user = this.findUser(userId);
         this.userRepository.delete(user);
         return true;
+    }
+
+    @Override
+    public UserServiceModel saveUserToDb(UserServiceModel inputUser) {
+        return null;
+        //todo
     }
 
     private User findUser(Long id) {

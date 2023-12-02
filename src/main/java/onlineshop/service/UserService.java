@@ -8,6 +8,7 @@ public interface UserService extends UserDetailsService {
     UserServiceModel register(UserServiceModel userServiceModel);
     UserServiceModel editUser(UserServiceModel userServiceModel);
     UserServiceModel getUserById(Long userId);
+    UserServiceModel getUserByUsername(String username);
     boolean deleteUserById(Long userId);
-
+    UserServiceModel saveUserToDb(UserServiceModel inputUser);
 }

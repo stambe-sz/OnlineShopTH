@@ -36,3 +36,43 @@ form {
     background-size: cover;
     background-position: center;
 }
+.nav{
+    box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+}
+.nav-ul{
+    box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      display: inline-block;
+      background: #019101;
+}
+.nav-ul{
+    box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      
+}
+.nav-ul > li {
+    display: inline-block;
+}
+.nav-item {
+    color: white;
+    display: inline-block;
+    text-decoration: none;
+    padding: 2px 5px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    transition: all .2s;
+}
+
+.nav-item:hover {
+    /* transform: rotate(7deg); */
+    color: rgb(244, 14, 22);
+    background: #019101;
+}
+.nav-item left{
+  float: left;
+}

@@ -35,6 +35,9 @@ public class User extends BaseEntity implements UserDetails {
     @OneToOne(cascade = CascadeType.ALL)
     private Role role;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private Cart cart;
+
     @Override
     public List<Role> getAuthorities() {
         List<Role> roles = new ArrayList<>();
