@@ -1,7 +1,6 @@
 package onlineshop.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,4 +11,8 @@ import lombok.Setter;
 @Entity
 @Table(name = "cart_items")
 public class CartItem extends BaseEntity{
+    @ManyToOne
+    private Product product;
+    @Column
+    private int quantity;
 }

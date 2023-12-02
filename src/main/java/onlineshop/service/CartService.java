@@ -1,5 +1,6 @@
 package onlineshop.service;
 
+import onlineshop.model.entity.CartItem;
 import onlineshop.model.entity.Product;
 import onlineshop.model.service.ProductServiceModel;
 
@@ -11,6 +12,6 @@ public interface CartService {
     void updateProductQuantity(ProductServiceModel productServiceModel, int newQuantity);
     void removeProduct(ProductServiceModel productServiceModel);
     void clearCart();
-    List<Product> getCartProducts();
+    List<CartItem> getCartItems();
     BigDecimal getTotalPrice();
 }
