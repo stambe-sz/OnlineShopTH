@@ -1,14 +1,10 @@
 package onlineshop.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import onlineshop.enums.RoleEnum;
-import onlineshop.model.entity.Cart;
 import onlineshop.model.entity.Role;
 import onlineshop.model.entity.User;
-import onlineshop.repository.RoleRepository;
-import onlineshop.repository.UserRepository;
 import onlineshop.model.service.UserServiceModel;
-import onlineshop.service.CartService;
+import onlineshop.repository.UserRepository;
 import onlineshop.service.RoleService;
 import onlineshop.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -25,7 +21,6 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final RoleService roleService;
-    private final CartService cartService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ModelMapper modelMapper;
 
@@ -37,7 +32,7 @@ public class UserServiceImpl implements UserService {
             Role roleAdmin = this.roleService.findRoleByName("ADMIN");
             user.setRole(roleAdmin);
         } else {
-            Role roleUser = this.roleService.findRoleByName("User");
+            Role roleUser = this.roleService.findRoleByName("USER");
             user.setRole(roleUser);
         }
 
@@ -89,9 +84,11 @@ public class UserServiceImpl implements UserService {
     private User mapUser(User user, UserServiceModel userServiceModel) {
         user.setEmail(userServiceModel.getEmail());
         user.setPassword(userServiceModel.getPassword());
-        user.setPassword(userServiceModel.getPassword());
         user.setFirstName(userServiceModel.getFirstName());
         user.setLastName(userServiceModel.getLastName());
+        user.setAddress(userServiceModel.getAddress());
+        user.setUsername(userServiceModel.getUsername());
+        user.setPassword(userServiceModel.getPassword());
         return user;
     }
 

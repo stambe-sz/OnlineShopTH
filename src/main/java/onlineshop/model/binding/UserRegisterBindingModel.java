@@ -1,12 +1,9 @@
 package onlineshop.model.binding;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import onlineshop.model.entity.Role;
 
 @Getter
 @Setter

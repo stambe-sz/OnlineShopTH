@@ -32,7 +32,7 @@ form {
     background-color: rgba(1, 141, 8, 0);
 }
 .addProduct{
-    background-image: url(/images/addProduct.jpg);
+    background-image: url("../images/addProduct.jpg");
     background-size: cover;
     background-position: center;
 }

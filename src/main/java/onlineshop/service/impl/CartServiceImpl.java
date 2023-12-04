@@ -2,12 +2,9 @@ package onlineshop.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import onlineshop.model.entity.CartItem;
-import onlineshop.model.entity.User;
 import onlineshop.model.service.CartItemServiceModel;
 import onlineshop.model.service.ProductServiceModel;
-import onlineshop.model.service.UserServiceModel;
 import onlineshop.service.CartService;
-import onlineshop.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -16,16 +13,16 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class CartServiceImpl implements CartService {
-    private final UserService userService;
+    //private final UserService userService - cycle!
     private final ModelMapper modelMapper;
 
     @Override
     public void addProduct(CartItemServiceModel cartItemServiceModel) {
-        UserServiceModel foundUser = this.userService.getUserByUsername(
-                cartItemServiceModel.getUsername());
-        foundUser.getCart().getCartItems().add(cartItemServiceModel);
-        User user = this.modelMapper.map(foundUser, User.class);
-        this.userService.saveUserToDb(user);
+//        UserServiceModel foundUser = this.userService.getUserByUsername(
+//                cartItemServiceModel.getUsername());
+//        foundUser.getCart().getCartItems().add(cartItemServiceModel);
+//        User user = this.modelMapper.map(foundUser, User.class);
+//        this.userService.saveUserToDb(user);
     }
 
     @Override

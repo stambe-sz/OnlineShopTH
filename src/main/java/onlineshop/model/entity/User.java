@@ -32,7 +32,7 @@ public class User extends BaseEntity implements UserDetails {
     private String password;
     @Column
     private String address;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private Role role;
 
     @OneToOne(cascade = CascadeType.ALL)
