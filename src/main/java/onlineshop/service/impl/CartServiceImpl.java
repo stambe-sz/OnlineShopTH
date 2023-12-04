@@ -6,7 +6,6 @@ import onlineshop.model.entity.User;
 import onlineshop.model.service.CartItemServiceModel;
 import onlineshop.model.service.ProductServiceModel;
 import onlineshop.model.service.UserServiceModel;
-import onlineshop.repository.UserRepository;
 import onlineshop.service.CartService;
 import onlineshop.service.UserService;
 import org.modelmapper.ModelMapper;
@@ -17,9 +16,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class CartServiceImpl implements CartService {
-
     private final UserService userService;
-    private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
     @Override
@@ -27,8 +24,8 @@ public class CartServiceImpl implements CartService {
         UserServiceModel foundUser = this.userService.getUserByUsername(
                 cartItemServiceModel.getUsername());
         foundUser.getCart().getCartItems().add(cartItemServiceModel);
-        User u = this.modelMapper.map(foundUser, User.class);
-        this.userRepository.saveAndFlush(u);
+        User user = this.modelMapper.map(foundUser, User.class);
+        this.userService.saveUserToDb(user);
     }
 
     @Override

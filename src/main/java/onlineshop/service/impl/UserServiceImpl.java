@@ -40,10 +40,7 @@ public class UserServiceImpl implements UserService {
             Role roleUser = this.roleService.findRoleByName("User");
             user.setRole(roleUser);
         }
-        Cart cart = new Cart();
-        cart.setUsername(user.getUsername());
-        this.cartService.createCart(cart);
-        user.setCart(cart);
+
         User savedUser = this.userRepository.save(user);
         return modelMapper.map(savedUser, UserServiceModel.class);
     }
@@ -77,9 +74,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserServiceModel saveUserToDb(UserServiceModel inputUser) {
-        return null;
-        //todo
+    public User saveUserToDb(User user) {
+        return this.userRepository.save(user);
     }
 
     private User findUser(Long id) {

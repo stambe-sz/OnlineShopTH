@@ -17,6 +17,4 @@ public interface CartService {
     List<CartItem> getCartItems();
     BigDecimal getTotalPrice();
     boolean cartCheckout(String username);
-
-    void createCart(Cart cart);
 }
