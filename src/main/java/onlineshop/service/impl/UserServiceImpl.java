@@ -8,6 +8,8 @@ import onlineshop.model.entity.User;
 import onlineshop.repository.RoleRepository;
 import onlineshop.repository.UserRepository;
 import onlineshop.model.service.UserServiceModel;
+import onlineshop.service.CartService;
+import onlineshop.service.RoleService;
 import onlineshop.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,7 +24,8 @@ import java.util.NoSuchElementException;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+    private final RoleService roleService;
+    private final CartService cartService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ModelMapper modelMapper;
 
@@ -31,15 +34,16 @@ public class UserServiceImpl implements UserService {
         User user = modelMapper.map(userServiceModel, User.class);
         user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
         if (this.userRepository.count() == 0){
-            Role roleAdmin =
-                    this.roleRepository.findByName(RoleEnum.ADMIN.name());
+            Role roleAdmin = this.roleService.findRoleByName("ADMIN");
             user.setRole(roleAdmin);
         } else {
-            Role roleUser =
-                    this.roleRepository.findByName(RoleEnum.USER.name());
+            Role roleUser = this.roleService.findRoleByName("User");
             user.setRole(roleUser);
         }
-        user.setCart(new Cart());
+        Cart cart = new Cart();
+        cart.setUsername(user.getUsername());
+        this.cartService.createCart(cart);
+        user.setCart(cart);
         User savedUser = this.userRepository.save(user);
         return modelMapper.map(savedUser, UserServiceModel.class);
     }
@@ -55,16 +59,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserServiceModel getUserById(Long userId) {
         User user = this.findUser(userId);
-        UserServiceModel foundUser = modelMapper.map(user, UserServiceModel.class);
-        //TODO getUserById(Long userId)...
-        return foundUser;
+        return modelMapper.map(user, UserServiceModel.class);
     }
 
     @Override
     public UserServiceModel getUserByUsername(String username) {
-        User u = this.userRepository.findUserByUsername(username)
+        User user = this.userRepository.findUserByUsername(username)
                 .orElse(null);
-        return this.modelMapper.map(u, UserServiceModel.class);
+        return this.modelMapper.map(user, UserServiceModel.class);
     }
 
     @Override
@@ -89,7 +91,6 @@ public class UserServiceImpl implements UserService {
     }
 
     private User mapUser(User user, UserServiceModel userServiceModel) {
-        user.setRole(userServiceModel.getRole());
         user.setEmail(userServiceModel.getEmail());
         user.setPassword(userServiceModel.getPassword());
         user.setPassword(userServiceModel.getPassword());
