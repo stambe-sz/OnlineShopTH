@@ -18,6 +18,7 @@ public class UserRegisterBindingModel {
     private String lastName;
     private String email;
     private String password;
+    private String confirmPassword;
     @Size(min = 10,max = 100,message = "Address length must be between 3 and 20 characters")
     private String address;
 
