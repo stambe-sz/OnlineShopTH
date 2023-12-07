@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import onlineshop.model.binding.UserRegisterBindingModel;
 import onlineshop.model.service.UserServiceModel;
 import onlineshop.service.UserService;
-import onlineshop.tools.Tools;
 import org.modelmapper.ModelMapper;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,18 +15,17 @@ import static onlineshop.constants.ControllerPaths.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(REQUEST_MAPPING_USER)
+@RequestMapping("/users")
 public class UserController {
     private final UserService userService;
     private final ModelMapper modelMapper;
-    private final Tools tools;
 
-    @GetMapping(GET_MAPPING_REGISTER_USER)
+    @GetMapping("/register")
     public String register(Model model){
-        if (!model.containsAttribute("reg_user")){
-            model.addAttribute("reg_user",new UserRegisterBindingModel());
-        }
-        return "register";
+//        if (!model.containsAttribute("userReg")){
+//            model.addAttribute("userReg",new UserRegisterBindingModel());
+//        }
+        return "/register";
     }
     @PostMapping(POST_MAPPING_REGISTER_USER)
     public String confRegister(@Valid @ModelAttribute("userReg") UserRegisterBindingModel userReg,
@@ -46,6 +44,11 @@ public class UserController {
         }
         userService.register(modelMapper.map(userReg, UserServiceModel.class));
         return REDIRECT_TO_LOGIN;
+    }
+
+    @ModelAttribute
+    public UserRegisterBindingModel userRegisterBindingModel(){
+        return new UserRegisterBindingModel();
     }
 
 }
