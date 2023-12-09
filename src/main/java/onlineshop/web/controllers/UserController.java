@@ -6,6 +6,7 @@ import onlineshop.model.binding.UserRegisterBindingModel;
 import onlineshop.model.service.UserServiceModel;
 import onlineshop.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import static onlineshop.constants.ControllerPaths.*;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @RequestMapping("/users")
 public class UserController {
@@ -22,10 +23,10 @@ public class UserController {
 
     @GetMapping("/register")
     public String register(Model model){
-//        if (!model.containsAttribute("userReg")){
-//            model.addAttribute("userReg",new UserRegisterBindingModel());
-//        }
-        return "/register";
+        if (!model.containsAttribute("userReg")){
+            model.addAttribute("userReg",new UserRegisterBindingModel());
+        }
+        return "register";
     }
     @PostMapping(POST_MAPPING_REGISTER_USER)
     public String confRegister(@Valid @ModelAttribute("userReg") UserRegisterBindingModel userReg,
