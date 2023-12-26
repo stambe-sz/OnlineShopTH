@@ -92,12 +92,12 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User foundUser = this.userRepository.findUserByUsername(username).orElse(null);
-        if (foundUser == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
-        return foundUser;
-    }
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        User foundUser = this.userRepository.findUserByUsername(username).orElse(null);
+//        if (foundUser == null) {
+//            throw new UsernameNotFoundException("User not found");
+//        }
+//        return foundUser;
+//    }
 }

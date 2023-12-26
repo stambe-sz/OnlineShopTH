@@ -4,7 +4,7 @@ import onlineshop.model.entity.User;
 import onlineshop.model.service.UserServiceModel;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface UserService extends UserDetailsService {
+public interface UserService{
 
     UserServiceModel register(UserServiceModel userServiceModel);
     UserServiceModel editUser(UserServiceModel userServiceModel);
