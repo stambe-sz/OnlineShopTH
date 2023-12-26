@@ -96,7 +96,7 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User foundUser = this.userRepository.findUserByUsername(username).orElse(null);
         if (foundUser == null) {
-            //TODO
+            throw new UsernameNotFoundException("User not found");
         }
         return foundUser;
     }

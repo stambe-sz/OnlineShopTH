@@ -3,7 +3,6 @@ package onlineshop.utils;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import onlineshop.enums.CategoryEnum;
-import onlineshop.enums.ProductEnum;
 import onlineshop.enums.RoleEnum;
 import onlineshop.model.entity.Category;
 import onlineshop.model.entity.Product;
