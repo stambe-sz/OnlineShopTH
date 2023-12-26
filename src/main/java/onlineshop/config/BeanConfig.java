@@ -1,6 +1,7 @@
 package onlineshop.config;
 
 import lombok.RequiredArgsConstructor;
+import onlineshop.repository.UserRepository;
 import onlineshop.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
@@ -11,13 +12,12 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @RequiredArgsConstructor
 public class BeanConfig {
-    private final UserService userService;
+    private final UserRepository userRepository;
 
     @Bean
     public ModelMapper getModelMapper(){
@@ -31,7 +31,7 @@ public class BeanConfig {
     public UserDetailsService userDetailsService(){
         return username -> {
             try {
-                return userService.loadUserByUsername(username);
+                return userRepository.findUserByUsername(username).orElseThrow(()-> new Exception("User not found."));
             }catch (Exception e){
                 return (UserDetails) new RuntimeException(e);
             }

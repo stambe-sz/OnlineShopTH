@@ -10,6 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UserRegisterBindingModel {
 
+    //todo make restrictions
     @Size(min = 3,max = 20,message = "Username length must be between 3 and 20 characters")
     private String username;
     @Size(min = 3,max = 20,message = "First name length must be between 3 and 20 characters")
