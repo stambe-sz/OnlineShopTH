@@ -18,28 +18,13 @@ public class Init {
 
     private final RoleRepository roleRepository;
     private final CategoryRepository categoryRepository;
-    private final ProductRepository productRepository;
 
     @PostConstruct
     void loadData() {
         this.loadRoles();
         this.loadCategories();
-        //this.loadProducts();
     }
-    private void loadProducts() {
-        if (this.productRepository.count() == 0) {
-            Product product = null;
-            for (int i = 0; i < ProductEnum.values().length; i++) {
-                product = new Product(ProductEnum.values()[i].getProduct().getName(),
-                        ProductEnum.values()[i].getProduct().getDescription(),
-                        ProductEnum.values()[i].getProduct().getQuantity(),
-                        ProductEnum.values()[i].getProduct().getCategory(),
-                        ProductEnum.values()[i].getProduct().getProductCondition(),
-                        ProductEnum.values()[i].getProduct().getImages());
-                this.productRepository.save(product);
-            }
-        }
-    }
+
 
     private void loadRoles() {
         if (this.roleRepository.count() == 0) {
