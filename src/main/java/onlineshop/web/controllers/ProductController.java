@@ -18,8 +18,12 @@ public class ProductController {
     private final ModelMapper modelMapper;
 
     @GetMapping("/products/add")
-    public String getAllProducts() {
+    public String getAddProduct() {
         return "add-product";
+    }
+    @GetMapping("/products")
+    public String getAllProducts() {
+        return "products";
     }
 
     @PostMapping("/products/add")
