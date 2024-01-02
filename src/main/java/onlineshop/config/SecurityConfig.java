@@ -18,7 +18,14 @@ public class SecurityConfig {
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/","/users/login","/users/register").permitAll()
                         .anyRequest().authenticated()
-        );
+        ).formLogin(formLogin -> {
+            formLogin
+                    .loginPage("/users/login")
+                    .usernameParameter("username")
+                    .passwordParameter("password")
+                    .defaultSuccessUrl("/")
+                    .failureForwardUrl()
+        });
 
 //        http.authorizeHttpRequests((auth) ->
 //                auth
