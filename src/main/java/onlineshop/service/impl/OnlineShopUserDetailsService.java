@@ -6,6 +6,9 @@ import onlineshop.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import java.util.List;
+
 @RequiredArgsConstructor
 public class OnlineShopUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
@@ -13,10 +16,15 @@ public class OnlineShopUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         userRepository
                 .findUserByUsername(username)
-                .map()
+                .map(this::map)
+                .orElseThrow(()-> new UsernameNotFoundException("User not found"));
         return null;
     }
     private UserDetails map(User user){
-
+        return org.springframework.security.core.userdetails.User
+                .withUsername(user.getUsername())
+                .password(user.getPassword())
+                .authorities(List.of(user.getRole()))
+                .build();
     }
 }
