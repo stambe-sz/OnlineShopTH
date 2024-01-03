@@ -19,33 +19,33 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(auth ->
-                auth
-                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/css/**")).permitAll()
-                        .anyRequest()
-                        .authenticated()
-        ).formLogin(formLogin -> {
-            formLogin
-                    .loginPage("/users/login")
-                    .usernameParameter("username")
-                    .passwordParameter("password")
-                    .defaultSuccessUrl("/")
-                    .failureForwardUrl("/users/login-error");
-        }).logout(logout->{
-            logout
-                    .logoutUrl("/users/logout")
-                    .logoutSuccessUrl("/")
-                    .invalidateHttpSession(true);
-        });
-
-//        http.authorizeHttpRequests((auth) ->
+//        http.authorizeHttpRequests(auth ->
 //                auth
-//                        .requestMatchers("/css/**", "/login", "/users/login", "/users/register", "/")
-//                        .permitAll()
-//                        .requestMatchers("/products/add").hasRole("ADMIN")
+//                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+//                        .requestMatchers(new AntPathRequestMatcher("/css/**")).permitAll()
 //                        .anyRequest()
-//                        .authenticated());
+//                        .authenticated()
+//        ).formLogin(formLogin -> {
+//            formLogin
+//                    .loginPage("/users/login")
+//                    .usernameParameter("username")
+//                    .passwordParameter("password")
+//                    .defaultSuccessUrl("/")
+//                    .failureForwardUrl("/users/login-error");
+//        }).logout(logout->{
+//            logout
+//                    .logoutUrl("/users/logout")
+//                    .logoutSuccessUrl("/")
+//                    .invalidateHttpSession(true);
+//        });
+
+        http.authorizeHttpRequests((auth) ->
+                auth
+                        .requestMatchers("/css/**", "/login", "/users/login", "/users/register", "/")
+                        .permitAll()
+                        .requestMatchers("/products/add").hasRole("ADMIN")
+                        .anyRequest()
+                        .authenticated());
 
         http.csrf(AbstractHttpConfigurer::disable);
         http.cors(AbstractHttpConfigurer::disable);

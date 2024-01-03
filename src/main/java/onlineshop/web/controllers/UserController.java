@@ -15,10 +15,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import static onlineshop.constants.ControllerPaths.*;
+import static onlineshop.constants.ControllerPaths.POST_MAPPING_REGISTER_USER;
+import static onlineshop.constants.ControllerPaths.REDIRECT_TO_LOGIN;
 
 @Controller
 @RequiredArgsConstructor
@@ -53,7 +57,7 @@ public class UserController {
             return "redirect:/";
         } catch (AuthenticationException e) {
             bindingResult.rejectValue("password", "error.loginForm", "Invalid username or password");
-            return "redirect:/users/login";
+            return "redirect:/login";
         }
     }
 
