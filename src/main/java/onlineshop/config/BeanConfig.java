@@ -27,16 +27,16 @@ public class BeanConfig {
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
     }
-//    @Bean
-//    public UserDetailsService userDetailsService(){
-//        return username -> {
-//            try {
-//                return userRepository.findUserByUsername(username).orElseThrow(()-> new Exception("User not found."));
-//            }catch (Exception e){
-//                return (UserDetails) new RuntimeException(e);
-//            }
-//        };
-//    }
+    @Bean
+    public UserDetailsService userDetailsService(){
+        return username -> {
+            try {
+                return userRepository.findUserByUsername(username).orElseThrow(()-> new Exception("User not found."));
+            }catch (Exception e){
+                return (UserDetails) new RuntimeException(e);
+            }
+        };
+    }
 
     @Bean
     public AuthenticationProvider authenticationProvider(){

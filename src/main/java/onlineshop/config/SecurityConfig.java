@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -21,8 +22,9 @@ public class SecurityConfig {
         http.authorizeHttpRequests(auth ->
                 auth
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/","/users/login","/users/register").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers(new AntPathRequestMatcher("/css/**")).permitAll()
+                        .anyRequest()
+                        .authenticated()
         ).formLogin(formLogin -> {
             formLogin
                     .loginPage("/users/login")
@@ -49,10 +51,10 @@ public class SecurityConfig {
         http.cors(AbstractHttpConfigurer::disable);
         return http.build();
     }
-    @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepository){
-        return new OnlineShopUserDetailsService(userRepository);
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService(UserRepository userRepository){
+//        return new OnlineShopUserDetailsService(userRepository);
+//    }
     @Bean
     public PasswordEncoder passwordEncoder(){
         return Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8();

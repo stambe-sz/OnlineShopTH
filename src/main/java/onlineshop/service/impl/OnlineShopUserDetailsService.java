@@ -14,11 +14,10 @@ public class OnlineShopUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        userRepository
+        return userRepository
                 .findUserByUsername(username)
                 .map(this::map)
                 .orElseThrow(()-> new UsernameNotFoundException("User not found"));
-        return null;
     }
     private UserDetails map(User user){
         return org.springframework.security.core.userdetails.User
