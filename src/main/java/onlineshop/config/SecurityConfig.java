@@ -45,7 +45,13 @@ public class SecurityConfig {
                         .permitAll()
                         .requestMatchers("/products/add").hasRole("ADMIN")
                         .anyRequest()
-                        .authenticated());
+                        .authenticated())
+                .logout(logout->{
+                    logout
+                            .logoutUrl("/users/logout")
+                            .logoutSuccessUrl("/")
+                            .invalidateHttpSession(true);
+                });
 
         http.csrf(AbstractHttpConfigurer::disable);
         http.cors(AbstractHttpConfigurer::disable);

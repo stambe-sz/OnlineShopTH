@@ -2,21 +2,24 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org">
 <div th:replace="fragments/head :: head"></div>
+<!-- <link rel="stylesheet" href="/static/css/style.css"> -->
 
 <body>
 	<div th:replace="fragments/navbar2::nav2"></div>
 	<div class="container">
 		<h1>WELCOME TO ONLINESHOP</h1>
-		<form th:action="@{/users/login}" th:method="POST" th:object="${userLoginBindingModel}">
-			<label for="username">Username
+		<form class="form-login" th:action="@{/users/login}" th:method="POST" th:object="${userLoginBindingModel}">
+			<label for="username">
+				<p>Username</p>
 				<input th:field="*{username}" th:errorclass="is-invalid" id="username" name="username" type="text">
 				<small>Error message</small>
 			</label>
-			<label for="password">Password
+			<label for="password">
+				<p>Password</p>
 				<input th:field="*{password}" th:errorclass="is-invalid" id="password" name="password" type="password">
 				<small>Error message</small>
 			</label>
-			<button type="submit" class="btn btn-info m-2">Login</button>
+			<button  type="submit" class="btn btn-info m-2">Login</button>
 		</form>
 	</div>
 	<div th:replace="fragments/footer :: footer"></div>
