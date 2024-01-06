@@ -1,21 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-<!--    <link rel="stylesheet" href="/css/bootstrap.css">-->
-    <link rel="stylesheet" href="/css/style.css">
-</head>
+      <div th:replace="fragments/head :: head"></div>
 <body>
   <header th:replace="fragments/navbar2::nav2"></header>
   <main>
-    <form th:action="@{/users/register}" th:method="POST" th:object="${userRegisterBindingModel}">
+    <form class="form-login" th:action="@{/users/register}" th:method="POST" th:object="${userRegisterBindingModel}">
         <div class="row mt-5">
             <div class="col-12">
                 <div class="form-group text-center">
-                  <label for="">Username</label>
+                  <p>Username</p>
                   <input th:field="*{username}" th:errorclass="is-invalid" type="text"
                     class="form-control" name=""  aria-describedby="helpId" placeholder="Your username...">
                   <small  class="form-text text-muted">Error message</small>
@@ -23,7 +17,7 @@
             </div>
             <div class="col-12">
                 <div class="form-group text-center">
-                  <label for="">First name</label>
+                  <p>First name</p>
                   <input th:field="*{firstName}" th:errorclass="is-invalid" type="text"
                     class="form-control" name=""  aria-describedby="helpId" placeholder="first name...">
                   <small  class="form-text text-muted">Error message</small>
@@ -31,7 +25,7 @@
             </div>
             <div class="col-12">
                 <div class="form-group text-center">
-                  <label for="">Last name</label>
+                  <p>Last name</p>
                   <input th:field="*{lastName}" th:errorclass="is-invalid" type="text"
                     class="form-control" name=""  aria-describedby="helpId" placeholder="last name...">
                   <small  class="form-text text-muted">Error message</small>
@@ -39,7 +33,7 @@
             </div>
             <div class="col-12">
                 <div class="form-group text-center">
-                  <label for="">email</label>
+                  <p>email</p>
                   <input th:field="*{email}" th:errorclass="is-invalid" type="text"
                     class="form-control" name=""  aria-describedby="helpId" placeholder="email...">
                   <small  class="form-text text-muted">Error message</small>
@@ -47,7 +41,7 @@
             </div>
             <div class="col-12">
                 <div class="form-group text-center">
-                  <label for="">Address</label>
+                  <p>Address</p>
                   <input th:field="*{address}" th:errorclass="is-invalid" type="text"
                     class="form-control" name=""  aria-describedby="helpId" placeholder="address...">
                   <small  class="form-text text-muted">Error message</small>
@@ -55,7 +49,7 @@
             </div>
             <div class="col-12">
                 <div class="form-group text-center">
-                    <label for="">Password</label>
+                    <p>Password</p>
                     <input th:field="*{password}" th:errorclass="is-invalid" type="password"
                       class="form-control" name=""  aria-describedby="helpId" placeholder="Your pasword...">
                     <small  class="form-text text-muted">Help text</small>
@@ -63,7 +57,7 @@
             </div>
             <div class="col-12">
                 <div class="form-group text-center">
-                    <label for="">Confirm Password</label>
+                    <p>Confirm Password</p>
                     <input th:field="*{confirmPassword}" th:errorclass="is-invalid" type="password"
                       class="form-control" name="" id="" aria-describedby="helpId" placeholder="Your pasword...">
                     <small id="helpId" class="form-text text-muted">Help text</small>

@@ -6,7 +6,7 @@
 
 <body>
 	<div th:replace="fragments/navbar2::nav2"></div>
-	<div class="conteiner">
+	<div class="container">
 		<h1>WELCOME TO ONLINESHOP</h1>
 		<form class="form-login" th:action="@{/users/login}" th:method="POST" th:object="${userLoginBindingModel}">
 			<label for="username">
