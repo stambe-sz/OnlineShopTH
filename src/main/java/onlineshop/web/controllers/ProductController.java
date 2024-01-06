@@ -7,31 +7,33 @@ import onlineshop.model.service.ProductServiceModel;
 import onlineshop.service.ProductService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/products")
 public class ProductController {
     private final ProductService productService;
     private final ModelMapper modelMapper;
 
-    @GetMapping("/products/add")
+    @GetMapping("/add")
     public String getAddProduct() {
         return "add-product";
     }
-    @GetMapping("/products")
+    @GetMapping("/all")
     public String getAllProducts() {
         return "products";
     }
 
-    @PostMapping("/products/add")
+    @PostMapping("/add")
     private String addProduct(@Valid ProductAddBindingModel productAddBindingModel){
         System.out.println();
         productService.addProduct(modelMapper
                 .map(productAddBindingModel, ProductServiceModel.class));
         return "redirect:home";
     }
-
+    @ModelAttribute
+    public ProductAddBindingModel productAddBindingModel(){
+        return new ProductAddBindingModel();
+    }
 }
