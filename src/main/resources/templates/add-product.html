@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
+      <link rel="stylesheet" href="/static/css/style.css">
 <div th:replace="fragments/head :: head"></div>
-<body class="p-3 m-0 border-0 bd-example m-0 border-0">
-  <div class="addProduct">
-      <form th:action="@{/products/add}" th:method="POST" th:object="${productAddBindingModel}" enctype="multipart/form-data">
+<body class="addProduct">
+  <div th:replace="fragments/navbar2::nav2"></div>
+  <div class="">
+      <form class="form-login" th:action="@{/products/add}" th:method="POST" th:object="${productAddBindingModel}" enctype="multipart/form-data">
         <div class="col-12">
             <div class="form-group text-center">
               <p>Name</p>
