@@ -22,8 +22,15 @@
     background-image: url("../images/addProduct.jpg");
 }
 .homePage{
-    background-image: url("../images/home_page.jpg");
+    background-image: url("../images/home_page3.jpg");
     background-size: cover;
+}
+.login_page{
+    background-image: url("../images/login_page4.jpg");
+    background-size: cover;
+}
+.product_page{
+    background-image: url("../images/product_page.jpg");
 }
 .nav{
     display: inline-block;
