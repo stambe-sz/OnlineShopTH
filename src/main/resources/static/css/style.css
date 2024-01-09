@@ -1,10 +1,10 @@
-/* body {
-    background-position: center;
-    background-attachment: fixed;
-    background-size: cover;
-    margin-bottom: 5rem;
-    background-color: rgb(234, 241, 239);
-} */
+/*body {*/
+/*    background-position: center;*/
+/*    background-attachment: fixed;*/
+/*    background-size: cover;*/
+/*    margin-bottom: 5rem;*/
+/*    background-color: rgb(234, 241, 239);*/
+/*}*/
 
 .bg-nav{
     display: inline-block;
@@ -20,17 +20,27 @@
 }
 .addProduct{
     background-image: url("../images/addProduct.jpg");
+    background-image: url("static/images/addProduct.jpg");
 }
 .homePage{
     background-image: url("../images/home_page3.jpg");
+    /*background-image: url("static/images/home_page3.jpg");*/
     background-size: cover;
 }
 .login_page{
+    /*background-image: url("../images/login_page4.jpg");*/
+    /*background-image: url("static/images/login_page4.jpg");*/
     background-image: url("../images/login_page4.jpg");
     background-size: cover;
 }
+.register_page{
+    background-image: url("../images/register_page2.jpg");
+    background-size: cover ;
+}
 .product_page{
+    z-index: -100;
     background-image: url("../images/product_page.jpg");
+    /*background-image: url("static/images/product_page.jpg");*/
 }
 .nav{
     display: inline-block;
@@ -84,7 +94,9 @@
 }
 :root
 {
+    --clr1: rgba(0,0,0,0.0);
     --clr: #f5f6f7;
+    /*--clr: #f5f6f7;*/
 }
 body
 {
@@ -168,7 +180,8 @@ body
     height: 70px;
     background:#036815;
     border-radius: 50%;
-    border: 6px solid var(--clr);
+    /*border: 6px solid var(--clr);*/
+    border: 6px solid var(--clr1);
     transition: 0.5s;
 }
 .indicator::before
@@ -181,7 +194,8 @@ body
     height: 20px;
     background: transparent;
     border-top-right-radius: 20px;
-    box-shadow: 1px -10px 0 0 var(--clr);
+    box-shadow: 1px -10px 0 0 var(--clr1);
+    /*box-shadow: 1px -10px 0 0 var(--clr);*/
 }
 .indicator::after
 {
@@ -193,7 +207,7 @@ body
     height: 20px;
     background: transparent;
     border-top-left-radius: 20px;
-    box-shadow: -1px -10px 0 0 var(--clr);
+    box-shadow: -1px -10px 0 0 var(--clr1);
 }
 .navigation ul li:nth-child(1).active ~ .indicator
 {
@@ -221,14 +235,14 @@ body
 }
 /* navbar2 */
 /* INDEX PAGE */
-.conteiner
-{
-    width: 100%;
-    height: 100vh;   
-    background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75),url(/static/images/home_page.jpg));
-    background-size: cover;
-    background-position: center;
-}
+/*.conteiner*/
+/*{*/
+/*    width: 100%;*/
+/*    height: 100vh;   */
+/*    background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75),url(/static/images/home_page.jpg));*/
+/*    background-size: cover;*/
+/*    background-position: center;*/
+/*}*/
 /* login page */
 .form-login{
     margin: 10 auto;

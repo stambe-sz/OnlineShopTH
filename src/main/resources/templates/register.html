@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <div th:replace="fragments/head :: head"></div>
-<body>
+<body class="register_page">
   <header th:replace="fragments/navbar2::nav2"></header>
   <main>
     <form class="form-login" th:action="@{/users/register}" th:method="POST" th:object="${userRegisterBindingModel}">
