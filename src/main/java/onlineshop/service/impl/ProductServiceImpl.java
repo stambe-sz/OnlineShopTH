@@ -37,15 +37,15 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductServiceModel editProduct(ProductServiceModel productServiceModel) {
-        Product productFound = this.findProductById(productServiceModel.getId());
-        Product editProduct = this.mapProduct(productFound,productServiceModel);
-        this.productRepository.save(editProduct);
+        ProductServiceModel productFound = this.findProductById(productServiceModel.getId());
+        ProductServiceModel editProduct = this.mapProduct(productFound,productServiceModel);
+        this.productRepository.save(this.modelMapper.map(editProduct, Product.class));
         return modelMapper.map(editProduct, ProductServiceModel.class);
     }
     @Override
     public boolean deleteProductById(Long productId) {
-        Product product = this.findProductById(productId);
-        this.productRepository.delete(product);
+        ProductServiceModel product = this.findProductById(productId);
+        this.productRepository.delete(this.modelMapper.map(product, Product.class));
         return true;
     }
 
@@ -55,14 +55,14 @@ public class ProductServiceImpl implements ProductService {
         return modelMapper.map(product, ProductServiceModel.class);
     }
 
-    private Product findProductById(Long id) {
+    private ProductServiceModel findProductById(Long id) {
         Product product = this.productRepository.findById(id).orElse(null);
         if (product == null) {
             throw new NoSuchElementException();
         }
-        return product;
+        return this.modelMapper.map(product, ProductServiceModel.class);
     }
-    private Product mapProduct(Product productFound, ProductServiceModel productServiceModel) {
+    private ProductServiceModel mapProduct(ProductServiceModel productFound, ProductServiceModel productServiceModel) {
         productFound.setProductCondition(productServiceModel.getProductCondition());
         productFound.setName(productServiceModel.getName());
         productFound.setQuantity(productServiceModel.getQuantity());

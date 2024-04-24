@@ -69,8 +69,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User saveUserToDb(User user) {
-        return this.userRepository.save(user);
+    public UserServiceModel saveUserToDb(UserServiceModel user) {
+        User userForSave = this.modelMapper.map(user,User.class);
+        User savedUser = this.userRepository.save(userForSave);
+        UserServiceModel returnedUser = this.modelMapper.map(savedUser, UserServiceModel.class);
+        return returnedUser;
     }
 
     private User findUser(Long id) {

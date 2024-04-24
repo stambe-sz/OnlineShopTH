@@ -11,5 +11,5 @@ public interface UserService{
     UserServiceModel getUserById(Long userId);
     UserServiceModel getUserByUsername(String username);
     boolean deleteUserById(Long userId);
-    User saveUserToDb(User user);
+    UserServiceModel saveUserToDb(UserServiceModel user);
 }
