@@ -31,7 +31,7 @@ public class UserController {
     private final UserService userService;
     private final ModelMapper modelMapper;
     private final AuthenticationManager authenticationManager;
-
+//todo make all paths variables
     @GetMapping("/register")
     public String getRegister(){
         return "register";
