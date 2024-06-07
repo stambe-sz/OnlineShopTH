@@ -19,6 +19,5 @@ public class UserServiceModel extends BaseServiceModel {
     private String password;
     private String address;
     private RoleServiceModel role;
-
     private CartServiceModel cart;
 }

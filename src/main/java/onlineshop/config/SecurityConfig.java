@@ -1,6 +1,9 @@
 package onlineshop.config;
 
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import onlineshop.repository.UserRepository;
+import onlineshop.service.UserService;
 import onlineshop.service.impl.OnlineShopUserDetailsService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -8,15 +11,19 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+    private final UserService userService;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 //        http.authorizeHttpRequests(auth ->
@@ -40,13 +47,16 @@ public class SecurityConfig {
 //        });
 
         http.authorizeHttpRequests((auth) ->
-                auth
-                        .requestMatchers("/css/**", "/images/**", "/login", "/users/login", "/users/register", "/")
-                        .permitAll()
-                        .requestMatchers("/products/add").hasRole("ADMIN")
-                        .anyRequest()
-                        .authenticated())
-                .logout(logout->{
+                        auth
+                                .requestMatchers("/css/**", "/images/**", "/login", "/users/login", "/users/register", "/")
+                                .permitAll()
+                                .requestMatchers("/products/add").hasRole("ADMIN")
+                                .anyRequest()
+                                .authenticated())
+                .formLogin(formLogin ->
+                        formLogin.loginPage("/users/login")
+                                .permitAll())
+                .logout(logout -> {
                     logout
                             .logoutUrl("/users/logout")
                             .logoutSuccessUrl("/")
@@ -57,12 +67,19 @@ public class SecurityConfig {
         http.cors(AbstractHttpConfigurer::disable);
         return http.build();
     }
-//    @Bean
+
+    //    @Bean
 //    public UserDetailsService userDetailsService(UserRepository userRepository){
 //        return new OnlineShopUserDetailsService(userRepository);
 //    }
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8();
     }
+
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+//        manager.createUser(User.withUsername(userService.));
+//    }
 }
