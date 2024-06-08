@@ -121,6 +121,7 @@ body
 .navigation ul
 {
     display: flex;
+    /*justify-content: center;*/
     width: 425px;
 }
 .navigation ul li

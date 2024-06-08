@@ -20,7 +20,7 @@
                     <span class="text">Home</span>
                 </a>
             </li>
-            <li class="list">
+            <li sec:authorize="!isAuthenticated()" class="list">
                 <a href="/users/login" >
                     <span class="icon">
                         <ion-icon name="log-in-outline"></ion-icon>
@@ -36,7 +36,7 @@
                     <span class="text">Logout</span>
                 </a>
             </li>
-            <li class="list">
+            <li sec:authorize="!isAuthenticated()" class="list">
                 <a href="/users/register">
                     <span class="icon">
                         <ion-icon name="person-add-outline"></ion-icon>
@@ -45,12 +45,12 @@
                 </a>
             </li>
             <li sec:authorize="hasRole('ADMIN')" class="list">
-                <a href="/products/add">
+                    <a href="/products/add">
                     <span class="icon">
                         <ion-icon name="bag-add-outline"></ion-icon>
                     </span>
-                    <span class="text">Add Product</span>
-                </a>
+                        <span class="text">Add Product</span>
+                    </a>
             </li>
             <li sec:authorize="isAuthenticated()" class="list">
                 <a href="#">
