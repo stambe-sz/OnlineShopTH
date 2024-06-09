@@ -114,14 +114,13 @@ body
     background: #5252f4;
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     border-radius: 10px;
 }
 .navigation ul
 {
     display: flex;
-    /*justify-content: center;*/
     width: 425px;
 }
 .navigation ul li

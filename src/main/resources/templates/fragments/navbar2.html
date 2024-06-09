@@ -44,7 +44,7 @@
                     <span class="text">Register</span>
                 </a>
             </li>
-            <li sec:authorize="hasRole('ADMIN')" class="list">
+            <li th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" class="list">
                     <a href="/products/add">
                     <span class="icon">
                         <ion-icon name="bag-add-outline"></ion-icon>
