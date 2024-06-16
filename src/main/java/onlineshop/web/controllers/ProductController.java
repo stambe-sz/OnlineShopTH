@@ -27,7 +27,6 @@ public class ProductController {
 
     @PostMapping("/add")
     private String addProduct(@Valid ProductAddBindingModel productAddBindingModel){
-        System.out.println();
         productService.addProduct(modelMapper
                 .map(productAddBindingModel, ProductServiceModel.class));
         return "redirect:home";

@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService {
     private final RoleRepository roleRepository;
-    private final ModelMapper modelMapper;
-
 
     @Override
     public Long repoCount() {
