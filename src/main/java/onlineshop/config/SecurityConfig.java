@@ -1,29 +1,24 @@
 package onlineshop.config;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import onlineshop.repository.UserRepository;
 import onlineshop.service.UserService;
-import onlineshop.service.impl.OnlineShopUserDetailsService;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalAuthentication
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final UserService userService;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 //        http.authorizeHttpRequests(auth ->
@@ -48,11 +43,15 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests((auth) ->
                         auth
+
                                 .requestMatchers("/css/**", "/images/**", "/login", "/users/login", "/users/register", "/")
                                 .permitAll()
-                                .requestMatchers("/products/add").hasRole("ADMIN")
+                                .requestMatchers("/products/add")
+                                .hasRole("ADMIN")
                                 .anyRequest()
-                                .authenticated())
+                                .authenticated()
+                )
+
                 .formLogin(formLogin ->
                         formLogin.loginPage("/users/login")
                                 .permitAll())
