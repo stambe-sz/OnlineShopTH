@@ -17,6 +17,7 @@ import java.util.List;
 public class Cart extends BaseEntity{
     @Column(name = "username")
     private String username;
-    @OneToMany
+
+    @OneToMany(cascade = CascadeType.ALL)
     private List<CartItem> cartItems;
 }

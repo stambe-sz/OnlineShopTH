@@ -23,6 +23,6 @@ public class Image extends BaseEntity{
     private String description;
     @Column
     private String contentType;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Product product;
 }

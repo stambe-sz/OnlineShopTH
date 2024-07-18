@@ -14,6 +14,8 @@ import lombok.Setter;
 @Table(name = "cart_items")
 public class CartItem extends BaseEntity{
     @Column
+    private String username;
+    @Column
     private Long productId;
     @Column
     private int quantity;
