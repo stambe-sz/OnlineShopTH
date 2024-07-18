@@ -11,5 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 public class CartItemServiceModel {
     private String username;
-    private List<CartItem> cartItems;
+    private Long productId;
+    private int quantity;
 }
