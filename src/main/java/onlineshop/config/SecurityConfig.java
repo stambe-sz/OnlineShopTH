@@ -4,30 +4,19 @@ import lombok.RequiredArgsConstructor;
 import onlineshop.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-import java.util.ArrayList;
-
 @Configuration
-@EnableWebSecurity
-@EnableGlobalAuthentication
 @RequiredArgsConstructor
-public class SecurityConfig extends WebSecurityConfiguration {
-    private final UserService userService;
+@EnableWebSecurity(debug = true)
+public class SecurityConfig {
 
+    private final UserService userService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -53,17 +42,18 @@ public class SecurityConfig extends WebSecurityConfiguration {
 
         http.authorizeHttpRequests((auth) ->
                         auth
-
                                 .requestMatchers("/css/**", "/images/**", "/login", "/users/login", "/users/register", "/")
                                 .permitAll()
-                                .requestMatchers("/products/add")
-                                .hasRole("ADMIN")
+//                                .requestMatchers("/products/add").hasRole("ADMIN")
                                 .anyRequest()
-                                .authenticated()
-                )
-
+                                .authenticated())
                 .formLogin(formLogin ->
-                        formLogin.loginPage("/users/login")
+                        formLogin
+                                .loginPage("/users/login")
+                                .usernameParameter("username")
+                                .passwordParameter("password")
+                                .defaultSuccessUrl("/")
+                                .failureForwardUrl("/users/login-error")
                                 .permitAll())
                 .logout(logout -> {
                     logout
@@ -77,27 +67,37 @@ public class SecurityConfig extends WebSecurityConfiguration {
         return http.build();
     }
 
-    //    @Bean
-//    public UserDetailsService userDetailsService(UserRepository userRepository){
-//        return new OnlineShopUserDetailsService(userRepository);
-//    }
+    /*@Bean
+    public CustomUserDetailsService customUserDetailsService(UserRepository userRepository) {
+        return new CustomUserDetailsService(userRepository);
+    }*/
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8();
     }
 
-    @Bean
-    public UserDetailsService userDetailsService(AuthenticationManagerBuilder auth) {
-        InMemoryUserDetailsManager userDetailsManager = new InMemoryUserDetailsManager();
-        ArrayList<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        InMemoryUserDetailsManager userDetailsManager = new InMemoryUserDetailsManager();
+//        String username = getCurrentUsername();
+//        UserServiceModel user = userService.getUserByUsername(username) ;
+//
+//        userDetailsManager.createUser((UserDetails) user);
+//        return userDetailsManager;
+//    }
 
-        SimpleGrantedAuthority role1 = new SimpleGrantedAuthority("ADMIN");
-        SimpleGrantedAuthority role2 = new SimpleGrantedAuthority("USER");
-
-        roles.add(role1);
-        roles.add(role2);
-
-        userDetailsManager.createUser(User.withUsername(userService.getUserByUsername()));
-    }
-    
+//    public String getCurrentUsername(){
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        if (authentication == null || !authentication.isAuthenticated()){
+//            return null;
+//        }
+//
+//        Object principal = authentication.getPrincipal();
+//        if (principal instanceof UserDetails){
+//            return ((UserDetails) principal).getUsername();
+//        }else {
+//            return principal.toString();
+//        }
+//    }
 }
