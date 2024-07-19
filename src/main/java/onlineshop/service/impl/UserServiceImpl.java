@@ -55,9 +55,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserServiceModel getUserByUsername(String username) {
+    public UserServiceModel getUserByUsername(String username) throws Exception {
         User user = this.userRepository.findUserByUsername(username)
                 .orElse(null);
+        if (user == null) throw new Exception("User does not exist!");
         return this.modelMapper.map(user, UserServiceModel.class);
     }
 
@@ -104,3 +105,4 @@ public class UserServiceImpl implements UserService {
 //        return foundUser;
 //    }
 }
+
