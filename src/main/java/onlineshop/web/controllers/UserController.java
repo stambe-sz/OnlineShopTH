@@ -12,6 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,7 +32,8 @@ public class UserController {
     private final UserService userService;
     private final ModelMapper modelMapper;
     private final AuthenticationManager authenticationManager;
-//todo make all paths variables
+
+    //todo make all paths variables
     @GetMapping("/register")
     public String getRegister(){
         return "register";
@@ -54,6 +56,9 @@ public class UserController {
             Authentication authentication = authenticationManager.authenticate(token);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             Authentication context = SecurityContextHolder.getContext().getAuthentication();
+
+            UserDetails loggedUser = this.getLoggedInUserDetails();
+            System.out.println("Logged User is: " + loggedUser.getUsername());
             return "redirect:/";
         } catch (AuthenticationException e) {
             bindingResult.rejectValue("password", "error.loginForm", "Invalid username or password");
@@ -89,4 +94,14 @@ public class UserController {
         return new UserLoginBindingModel();
     }
 
+    public UserDetails getLoggedInUserDetails() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails) {
+                return (UserDetails) principal;
+            }
+        }
+        return null;
+    }
 }
