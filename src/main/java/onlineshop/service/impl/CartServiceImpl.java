@@ -1,6 +1,8 @@
 package onlineshop.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import onlineshop.model.entity.CartItem;
+import onlineshop.model.entity.User;
 import onlineshop.model.service.CartItemServiceModel;
 import onlineshop.model.service.CartServiceModel;
 import onlineshop.model.service.ProductServiceModel;
@@ -12,6 +14,7 @@ import onlineshop.tools.Tools;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -65,4 +68,3 @@ public class CartServiceImpl implements CartService {
         return foundProducts;
     }
 }
-

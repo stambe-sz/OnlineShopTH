@@ -10,7 +10,9 @@ import onlineshop.service.ProductService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -53,6 +55,15 @@ public class ProductServiceImpl implements ProductService {
     public ProductServiceModel getProductById(Long productId) {
         Product product = this.productRepository.findById(productId).orElse(null);
         return modelMapper.map(product, ProductServiceModel.class);
+    }
+
+    @Override
+    public List<ProductServiceModel> getAll() {
+        List<Product> products = this.productRepository.findAll();
+        List<ProductServiceModel> foundProducts = products.stream()
+                .map(p -> modelMapper.map(p,ProductServiceModel.class) )
+                .toList();
+        return foundProducts;
     }
 
     private ProductServiceModel findProductById(Long id) {
