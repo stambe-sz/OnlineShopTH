@@ -5,10 +5,8 @@ import lombok.RequiredArgsConstructor;
 import onlineshop.enums.CategoryEnum;
 import onlineshop.enums.RoleEnum;
 import onlineshop.model.entity.Category;
-import onlineshop.model.entity.Product;
 import onlineshop.model.entity.Role;
 import onlineshop.repository.CategoryRepository;
-import onlineshop.repository.ProductRepository;
 import onlineshop.repository.RoleRepository;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +22,6 @@ public class Init {
         this.loadRoles();
         this.loadCategories();
     }
-
 
     private void loadRoles() {
         if (this.roleRepository.count() == 0) {
