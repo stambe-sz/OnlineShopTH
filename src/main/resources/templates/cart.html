@@ -4,11 +4,11 @@
 <!-- <link rel="stylesheet" href="/static/css/style.css"> -->
 <head th:replace="fragments/head :: head"></head>
 <body class="homePage">
-<header th:replace="fragments/navbar2::nav2"></header>
+<header th:replace="fragments/navbar::navbar"></header>
 <main>
     <div class="cart-wrapper">
         <h1 class="cart-h1">Cart</h1>
-        <form>
+        <form th:action="@{/cart/get}" th:method="post">
             <table class="cart-table">
                 <thead>
                 <tr>
@@ -25,7 +25,8 @@
                     <td th:text="*{p.description}"></td>
                     <td th:text="*{p.productCondition}"></td>
                     <td th:text="*{p.category.getCategoryName()}"></td>
-                    <td th:text="*{p.quantity}"></td>
+                    <td th:text="*{p.orderQuantity}"></td>
+                    <td th:text="*{p.price}"></td>
                     <td><button class="cart-button">remove</button></td>
                 </tr>
                 </tbody>
@@ -38,13 +39,8 @@
             <div class="cart-btn">
                 <button type="submit" class="cart-button">Order</button>
             </div>
-
-
-
             <!-- TODO Бутон поръчка, дизайн
             -->
-
-
             <!-- ... -->
             <!--
             1.Вземам всички ид-та на продуктите от количката, намирам ги в списък и ги показвам
