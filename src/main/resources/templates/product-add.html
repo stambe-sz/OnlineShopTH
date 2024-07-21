@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+      <!-- <link rel="stylesheet" href="/static/css/style.css"> -->
+<div th:replace="fragments/head :: head"></div>
+<body class="addProduct">
+  <div th:replace="fragments/navbar2::nav2"></div>
+  <div class="">
+      <form class="form-login" th:action="@{/products/add}" th:method="POST" th:object="${productAddBindingModel}" enctype="multipart/form-data">
+        <div class="col-12">
+            <div class="form-group text-center">
+              <p>Name</p>
+              <input th:field="*{name}" th:errorclass="is-invalid" type="text"
+                class="form-control" name="name"  aria-describedby="helpId" placeholder="Product name...">
+              <small class="form-text text-muted">Error message</small>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group text-center">
+              <p>Description</p>
+              <input th:field="*{description}" th:errorclass="is-invalid" type="text"
+                class="form-control" name="description" aria-describedby="helpId" placeholder="Description...">
+              <small class="form-text text-muted">Error message</small>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group text-center">
+              <p>Quantity</p>
+              <input th:field="*{quantity}" th:errorclass="is-invalid" type="text"
+                class="form-control" name="quantity" aria-describedby="helpId" placeholder="Quantity...">
+              <small class="form-text text-muted">Error message</small>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group text-center">
+              <p>Image</p>
+              <input th:field="*{images}" th:errorclass="is-invalid" type="text"
+                class="form-control" name="images" aria-describedby="helpId" placeholder="Image...">
+              <small id="helpId" class="form-text text-muted">Error message</small>
+            </div>
+        </div>
+        <!-- <div class="dropdown d-flex justify-content-center mb-4">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Category
+            </a>
+          
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Food</a></li>
+              <li><a class="dropdown-item" href="#">Household</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </div>
+          <div class="dropdown d-flex justify-content-center">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Condition
+            </a>
+          
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">New</a></li>
+              <li><a class="dropdown-item" href="#">Used</a></li>
+            </ul>
+          </div> -->
+          <select th:field="*{category}" class="form-select form-select-sm mb-4" aria-label=".form-select-sm example"
+          >
+            <option selected value="">Category</option>
+            <option th:each="c : ${T(onlineshop.enums.CategoryEnum).values()}"
+                    th:text="${c}" th:value="${c}">Food</option>
+<!--            <option value="2">Household</option>-->
+<!--            <option value="3">Drinks</option>-->
+          </select>
+          <select th:field="*{productCondition}" class="form-select form-select-sm" aria-label=".form-select-sm example">
+            <option selected value="">Condition</option>
+            <option th:each="pC : ${T(onlineshop.enums.ProductConditionEnum).values()}" th:text="${pC}" th:value="${pC}">New</option>
+<!--            <option value="2">Used</option>-->
+<!--            <option value="3">New unpacked</option>-->
+          </select>
+        <div>
+            <button type="submit">Add Product</button>
+        </div>
+    </form>
+  </div>  
+</body>
+</html>

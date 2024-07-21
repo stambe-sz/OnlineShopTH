@@ -20,7 +20,8 @@
 }
 .addProduct{
     background-image: url("../images/addProduct.jpg");
-    background-image: url("static/images/addProduct.jpg");
+    /*background-image: url("static/images/addProduct.jpg");*/
+    background-size: cover;
 }
 .homePage{
     background-image: url("../images/home_page3.jpg");
@@ -38,8 +39,9 @@
     background-size: cover ;
 }
 .product_page{
-    z-index: -100;
-    background-image: url("../images/product_page.jpg");
+    /*z-index: -100;*/
+    background-image: url("../images/products_page.jpg");
+    background-size: cover;
     /*background-image: url("static/images/product_page.jpg");*/
 }
 .nav{
@@ -109,7 +111,8 @@ body
 }
 .navigation
 {
-    width: 600px;
+    /*navbar wight*/
+    width: 670px;
     height: 70px;
     background: #5252f4;
     position: relative;
@@ -118,10 +121,10 @@ body
     align-items: center;
     border-radius: 10px;
 }
-.navigation ul
-{
+.navigation ul {
     display: flex;
-    width: 425px;
+    /*move icons left right - 540px*/
+    width: 540px;
 }
 .navigation ul li
 {
@@ -140,7 +143,7 @@ body
     flex-direction: column;
     width: 100%;
     text-align: center;
-    font-weight: 500%;
+    font-weight: 500;
 }
 .navigation ul li a .icon
 {
@@ -245,7 +248,7 @@ body
 /*}*/
 /* login page */
 .form-login{
-    margin: 10 auto;
+    margin: 10px auto;
     padding: 50px;
     /* background-color:#f5f6f7; */
     display: flex;
@@ -261,4 +264,52 @@ body
 .container{
     display: flex;
     flex-direction: column;
+}
+
+.products-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+/*.product-wrapper {*/
+/*    background-color: white;*/
+/*    opacity: 0.7;*/
+/*    margin: 10px;*/
+/*}*/
+.product-page-h1 {
+    color: blue;
+    background-color: #0dcaf0;
+    text-align: center;
+    margin: 10px;
+}
+/*.product-page-h1 {*/
+/*    background-color: white;*/
+/*    opacity: 0.7;*/
+/*}*/
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #997404;
+    opacity: 1;
+    height: 50px;
+}
+.cart-table-row{
+    background-color: pink;
+    opacity: 0.7;
+}
+.cart-table, table, tbody, tr, td{
+    text-align: center;
+}
+.cart-h1{
+    text-align: center;
+}
+.cart-button{
+    margin: 10px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    background-color: #ffc720;
+    cursor: pointer;
+}
+.cart-btn{
+    text-align: center;
 }
