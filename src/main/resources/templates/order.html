@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
+<head th:replace="fragments/head :: head"></head>
+<body>
+<header th:replace="fragments/navbar::navbar"></header>
+<main>
+    <div class="order-wrapper">
+        <div>
+            <h1 class="title-h1">Order</h1>
+        </div>
+        <div class="container-order">
+            <div class="order-text">
+                <strong>Customer Name:</strong> John Doe<br>
+                <strong>Total Amount:</strong> $99.99<br>
+                <strong>Items:</strong>
+                <ul>
+                    <li>Product 1 - Quantity: 1</li>
+                    <li>Product 2 - Quantity: 2</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</main>
+<footer th:replace="fragments/footer::footer"></footer>
 </body>
 </html>

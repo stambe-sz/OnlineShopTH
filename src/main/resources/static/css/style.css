@@ -300,10 +300,11 @@ body
 .cart-table, table, tbody, tr, td{
     text-align: center;
 }
-.cart-h1{
+.title-h1{
     text-align: center;
 }
 .cart-button{
+	display: inline-block;
     margin: 10px;
     padding: 10px 20px;
     border-radius: 25px;
@@ -312,4 +313,18 @@ body
 }
 .cart-btn{
     text-align: center;
+}
+.container-order{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: aqua;
+}
+ul, ol {
+    list-style-type: none;
+    padding-left: 0;
+}
+ul li ::marker,
+ol li ::marker{
+    content: none;
 }
