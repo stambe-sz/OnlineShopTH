@@ -11,9 +11,11 @@ import java.util.List;
 
 public interface CartService {
 
-    void addProductToCart(CartItemServiceModel cism) throws Exception;
+    void addProductToCart(Long productId) throws Exception;
 
     List<ProductServiceModel> getCartItems() throws Exception;
+
+    void removeProductFromCart(Long productId) throws Exception;
         /*
     void addProduct(CartItemServiceModel cartItemServiceModel);
     void updateProductQuantity(ProductServiceModel productServiceModel, int newQuantity);

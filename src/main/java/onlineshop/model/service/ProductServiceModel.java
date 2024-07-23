@@ -18,5 +18,6 @@ public class ProductServiceModel extends BaseServiceModel {
     private int quantity;
     private CategoryServiceModel category;
     private String productCondition;
+    private int orderQuantity;
     private List<ImageServiceModel> images;
 }

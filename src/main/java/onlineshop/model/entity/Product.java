@@ -28,4 +28,6 @@ public class Product extends BaseEntity {
     private String productCondition;
     @ElementCollection
     private List<String> images;
+    @Column(name = "order_quantity")
+    private int orderQuantity;
 }
