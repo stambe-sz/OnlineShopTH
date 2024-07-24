@@ -27,7 +27,9 @@
                     <td th:text="*{p.category.getCategoryName()}"></td>
                     <td th:text="*{p.orderQuantity}"></td>
                     <td th:text="*{p.price}"></td>
-                    <td><button class="cart-button">remove</button></td>
+                    <td><a class="cart-button"
+                           th:href="@{/cart/remove-from-cart/{productId}(productId = ${p.getId()})}"
+                    >remove</a></td>
                 </tr>
                 </tbody>
                 <!--            <div th:each="p : ${allProducts}" class="product-wrapper">-->
