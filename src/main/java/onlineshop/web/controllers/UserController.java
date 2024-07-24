@@ -45,7 +45,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String postLogin (@ModelAttribute UserLoginBindingModel userLoginBindingModel,
+    public String postLogin (@Valid @ModelAttribute UserLoginBindingModel userLoginBindingModel,
                              BindingResult bindingResult){
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                 userLoginBindingModel.getUsername(),

@@ -8,6 +8,7 @@ import onlineshop.model.view.ProductViewModel;
 import onlineshop.service.CartService;
 import onlineshop.service.ProductService;
 import onlineshop.service.UserService;
+import onlineshop.tools.Tools;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,7 @@ public class CartController {
     private final ModelMapper modelMapper;
     private final UserService userService;
     private final ProductService productService;
+    private final Tools tools;
 
 
     @GetMapping
@@ -39,6 +41,7 @@ public class CartController {
         model.setViewName("cart");
         model.addObject("cartObject", cartObject);
         model.addObject("allProducts", allProducts);
+        model.addObject("username", tools.getLoggedUser());
         return model;
     }
     @GetMapping("/all")
@@ -52,9 +55,9 @@ public class CartController {
         return model;
     }
 
-    @GetMapping("/cart/checkout")
-    public String cartCheckout(@ModelAttribute String username) {
-        //...
+    @GetMapping("/checkout")
+    public String cartCheckout(@ModelAttribute String username) throws Exception {
+        this.cartService.getCartItems();
         return null;
     }
 
