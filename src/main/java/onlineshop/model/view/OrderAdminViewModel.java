@@ -1,17 +1,19 @@
-package onlineshop.model.service;
+package onlineshop.model.view;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import onlineshop.model.entity.CartItem;
 
 import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
-public class CartItemServiceModel {
+@AllArgsConstructor
+public class OrderAdminViewModel {
     private String username;
-    private Long productId;
-    private Double price;
-    private int quantity;
+    private Double totalAmount;
+    private List<CartItem> cartItems;
 }
