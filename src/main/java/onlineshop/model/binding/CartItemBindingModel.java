@@ -13,5 +13,6 @@ public class CartItemBindingModel {
 
     private String username;
     private Long productId;
+    private Double price;
     private int quantity;
 }

@@ -18,5 +18,7 @@ public class CartItem extends BaseEntity{
     @Column
     private Long productId;
     @Column
+    private Double price;
+    @Column
     private int quantity;
 }

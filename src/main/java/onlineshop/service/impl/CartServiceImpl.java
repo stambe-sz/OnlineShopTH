@@ -1,12 +1,11 @@
 package onlineshop.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import onlineshop.model.entity.CartItem;
-import onlineshop.model.entity.User;
 import onlineshop.model.service.CartItemServiceModel;
 import onlineshop.model.service.CartServiceModel;
 import onlineshop.model.service.ProductServiceModel;
 import onlineshop.model.service.UserServiceModel;
+import onlineshop.model.view.ProductViewModel;
 import onlineshop.repository.CartRepository;
 import onlineshop.repository.UserRepository;
 import onlineshop.service.CartService;
@@ -16,11 +15,11 @@ import onlineshop.tools.Tools;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +35,7 @@ public class CartServiceImpl implements CartService {
     @Override
     public void addProductToCart(Long productId) throws Exception {
         UserServiceModel foundUser = userService.getUserByUsername(tools.getLoggedUser());
-        if (foundUser.getCart() == null){
+        if (foundUser.getCart() == null) {
             foundUser.setCart(new CartServiceModel(
                     foundUser.getUsername(),
                     new ArrayList<>()
@@ -44,15 +43,15 @@ public class CartServiceImpl implements CartService {
         }
         CartServiceModel userCart = foundUser.getCart();
         List<CartItemServiceModel> itemsInCart = userCart.getCartItems();
-        boolean isExist = itemsInCart.stream().anyMatch(e-> e.getProductId().equals(productId));
+        boolean isExist = itemsInCart.stream().anyMatch(e -> e.getProductId().equals(productId));
         if (isExist) {
             CartItemServiceModel cartItemSm = itemsInCart.stream()
-                    .filter(e-> e.getProductId().equals(productId))
+                    .filter(e -> e.getProductId().equals(productId))
                     .findFirst().orElse(null);
-            if(cartItemSm == null) throw new Exception("Server Error 500 :)");
+            if (cartItemSm == null) throw new Exception("Server Error 500 :)");
             cartItemSm.setQuantity(cartItemSm.getQuantity() + 1);
         } else {
-            itemsInCart.add(new CartItemServiceModel(tools.getLoggedUser(), productId, 1));
+            itemsInCart.add(new CartItemServiceModel(tools.getLoggedUser(), productId, 0.0, 1 ));
         }
         this.userService.saveUserToDb(foundUser);
     }
@@ -74,11 +73,16 @@ public class CartServiceImpl implements CartService {
         }
         List<ProductServiceModel> foundProducts = new ArrayList<>();
         ProductServiceModel pr;
-        for (Map.Entry<Long, Integer> item: items.entrySet()) {
+        for (Map.Entry<Long, Integer> item : items.entrySet()) {
             pr = this.productService.getProductById(item.getKey());
             pr.setOrderQuantity(item.getValue());
             foundProducts.add(pr);
         }
+        if (foundProducts.isEmpty()){
+            foundUser.setCart(null);
+            userService.saveUserToDb(foundUser);
+        }
+
         return foundProducts;
     }
 
@@ -100,7 +104,7 @@ public class CartServiceImpl implements CartService {
         List<ProductServiceModel> foundProducts = new ArrayList<>();
         ProductServiceModel pr = null;
 
-        for (Map.Entry<Long, Integer> item: items.entrySet()) {
+        for (Map.Entry<Long, Integer> item : items.entrySet()) {
             pr = this.productService.getProductById(item.getKey());
             pr.setOrderQuantity(item.getValue());
             foundProducts.add(pr);
@@ -110,12 +114,33 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void removeProductFromCart(Long productId) throws Exception {
-        User foundUser = this.userRepository.findById(productId).orElse(null);
-        if(foundUser == null) throw new Exception("User...");
-        List<CartItem> cartItems = foundUser.getCart().getCartItems();
-        cartItems = cartItems.stream().filter(e -> !e.getProductId().equals(productId))
-                .toList();
-        foundUser.getCart().setCartItems(cartItems);
-        this.userRepository.saveAndFlush(foundUser);
+        UserServiceModel foundUser = this.userService.getUserByUsername(tools.getLoggedUser());
+        if (foundUser == null) throw new Exception("User not found");
+        List<CartItemServiceModel> cartItems = foundUser.getCart().getCartItems();
+
+        for (CartItemServiceModel item : cartItems) {
+
+            if (item.getProductId().equals(productId)) {
+                if (item.getQuantity() >= 2) {
+                    item.setQuantity(item.getQuantity() - 1);
+                    foundUser.getCart().setCartItems(cartItems);
+                } else {
+                    cartItems.clear();
+                    break;
+                }
+            }
+        }
+        this.userService.saveUserToDb(foundUser);
+    }
+
+    @Override
+    public List<ProductViewModel> getUserCartItems(String username) throws Exception {
+        UserServiceModel foundUser = this.userService.getUserByUsername(tools.getLoggedUser());
+        if (foundUser == null) throw new Exception("User not found");
+        List<CartItemServiceModel> cartItems = foundUser.getCart().getCartItems();
+        List<ProductViewModel> cartViewItems =
+                cartItems.stream().map(p-> modelMapper.map(p,ProductViewModel.class)).toList();
+
+        return cartViewItems;
     }
 }
