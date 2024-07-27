@@ -1,24 +1,29 @@
 package onlineshop.model.binding;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import static onlineshop.constants.RegexValidation.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class ProductAddBindingModel {
-    @Size(min = 3,max = 50,message = "Product name must be between 3 and 50 characters.")
+
+    @Pattern(regexp = PRODUCT_NAME_REGEX, message = PRODUCT_NAME_MIN_MAX_ERROR_MSG)
     private String name;
-    @Size(min = 3,message = "Product description must be more than 3 characters.")
+    @Pattern(regexp = PRODUCT_DESCRIPTION_REGEX, message = PRODUCT_DESCRIPTION_MIN_MAX_ERROR_MSG)
     private String description;
-    @Positive
+    @Positive(message = PRODUCT_QUANTITY_MIN_ERROR_MSG)
     private int quantity;
+    @Positive(message = PRODUCT_PRICE_MIN_ERROR_MSG)
+    private double price;
+    @Valid
     private CategoryBindingModel category;
+    @Pattern(regexp = PRODUCT_CONDITION_REGEX, message = PRODUCT_CONDITION_MSG)
     private String productCondition;
-    private List<String> images;
 }

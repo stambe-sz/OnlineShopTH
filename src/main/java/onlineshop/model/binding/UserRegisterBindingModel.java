@@ -1,29 +1,30 @@
 package onlineshop.model.binding;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import static onlineshop.constants.RegexValidation.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class UserRegisterBindingModel {
 
-    @Size(min = 3,max = 20,message = "Username length must be between 3 and 20 characters")
+    @Pattern(regexp = USERNAME_REGEX, message = USERNAME_REGEX_ERROR_MSG)
     private String username;
-    @Size(min = 3,max = 20,message = "First name length must be between 3 and 20 characters")
+    @Pattern(regexp = FIRST_NAME_REGEX, message = FIRST_NAME_REGEX_ERROR_MSG)
     private String firstName;
-    @Size(min = 3,max = 20,message = "Last name length must be between 3 and 20 characters")
+    @Pattern(regexp = LAST_NAME_REGEX, message = LAST_NAME_REGEX_ERROR_MSG)
     private String lastName;
-    @Email
+    @Pattern(regexp = EMAIL_REGEX, message = EMAIL_REGEX_ERROR_MSG)
     private String email;
-    @Size(min = 3,max = 30,message = "Password length must be between 3 and 30 characters")
+    @Pattern(regexp = PASSWORD_REGEX, message = PASSWORD_REGEX_ERROR_MSG)
     private String password;
-    @Size(min = 3,max = 30,message = "Password length must be between 3 and 30 characters")
+    @Pattern(regexp = PASSWORD_REGEX, message = PASSWORD_REGEX_ERROR_MSG)
     private String confirmPassword;
-    @Size(min = 10,max = 100,message = "Address length must be between 10 and 100 characters")
+    @Pattern(regexp = ADDRESS_REGEX, message = ADDRESS_ERROR_MSG)
     private String address;
 
 }
