@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-      <!-- <link rel="stylesheet" href="/static/css/style.css"> -->
-<div th:replace="fragments/head :: head"></div>
+
+<div th:replace="fragments/head2 :: head"></div>
+<link rel="stylesheet" th:href="@{../static/css/style2.css}">
+<link rel="stylesheet" href="/static/css/style2.css">
 <body class="addProduct">
-  <div th:replace="fragments/navbar2::nav2"></div>
+  <header th:replace="fragments/navbar2::navbar"></header>
   <div class="">
       <form class="form-login" th:action="@{/products/add}" th:method="POST" th:object="${productAddBindingModel}" enctype="multipart/form-data">
         <div class="col-12">
             <div class="form-group text-center">
-              <p>Name</p>
+              <p th:text="#{'NAME'}">Name</p>
               <input th:field="*{name}" th:errorclass="is-invalid" type="text"
                 class="form-control" name="name"  aria-describedby="helpId" placeholder="Product name...">
               <small class="form-text text-muted">Error message</small>
@@ -17,7 +19,7 @@
         </div>
         <div class="col-12">
             <div class="form-group text-center">
-              <p>Description</p>
+              <p th:text="#{'DESCRIPTION'}">Description</p>
               <input th:field="*{description}" th:errorclass="is-invalid" type="text"
                 class="form-control" name="description" aria-describedby="helpId" placeholder="Description...">
               <small class="form-text text-muted">Error message</small>
@@ -25,7 +27,7 @@
         </div>
         <div class="col-12">
             <div class="form-group text-center">
-              <p>Quantity</p>
+              <p th:text="#{'QUANTITY'}">Quantity</p>
               <input th:field="*{quantity}" th:errorclass="is-invalid" type="text"
                 class="form-control" name="quantity" aria-describedby="helpId" placeholder="Quantity...">
               <small class="form-text text-muted">Error message</small>
@@ -33,7 +35,15 @@
         </div>
         <div class="col-12">
             <div class="form-group text-center">
-              <p>Image</p>
+              <p th:text="#{'PRICE'}">Price</p>
+              <input th:field="*{price}" th:errorclass="is-invalid" type="text"
+                class="form-control" name="price" aria-describedby="helpId" placeholder="Price...">
+              <small class="form-text text-muted">Error message</small>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group text-center">
+              <p th:text="#{'IMAGE'}">Image</p>
               <input th:field="*{images}" th:errorclass="is-invalid" type="text"
                 class="form-control" name="images" aria-describedby="helpId" placeholder="Image...">
               <small id="helpId" class="form-text text-muted">Error message</small>
@@ -75,7 +85,7 @@
 <!--            <option value="3">New unpacked</option>-->
           </select>
         <div>
-            <button type="submit">Add Product</button>
+            <button type="submit" class="cart-button" th:text="#{'ADD_PRODUCT'}">Add Product</button>
         </div>
     </form>
   </div>  

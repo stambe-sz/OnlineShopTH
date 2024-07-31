@@ -1,58 +1,61 @@
-<navbar th:fragment="navbar">
-	<nav>
-		<a th:href="@{/}">Home</a>
-		<a th:href="@{/products}">Products</a>
-		<a th:href="@{/cart}">Cart</a>
-		<a th:href="@{/categories}">Category</a>
-		<a th:href="@{/products/add}">Product Add*</a>
-		<a th:href="@{/users/login}">Login</a>
-		<a th:href="@{/users/register}">Register</a>
-	</nav>
-</navbar>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns="http://www.w3.org/1999/xhtml"-->
+<!--      xmlns:th="http://www.thymeleaf.org"-->
+<!--      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">-->
+<!--<head th:fragment="head">-->
+<!--    <meta charset="UTF-8"/>-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>-->
+<!--    <link rel="stylesheet" href="/css/bootstrap.css"/>-->
+<!--    <link rel="stylesheet" href="/css/style.css"/>-->
+<!--</head>-->
+<!--<body class="navbar">-->
+<!--    <header th:fragment="navbar">-->
 
+<!--        <nav class="navbar navbar-expand-lg bg-body-tertiary">-->
+<!--&lt;!&ndash;            <div>&ndash;&gt;-->
+<!--&lt;!&ndash;                &lt;!&ndash;            <span th:text="#{hello}"></span><br>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                &lt;!&ndash;            <span th:text="#{welcome}"></span><br>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                <button type="button" th:text="#{switch-en}" onclick="window.location.href='http://localhost:8080/?localeData=en'"></button> &lt;!&ndash; 3 &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                <button type="button" th:text="#{switch-bg}" onclick="window.location.href='http://localhost:8080/?localeData=bg'"></button>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--            <div class="container-fluid">-->
+<!--&lt;!&ndash;                <a class="navbar-brand" href="/">Home</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <span class="navbar-toggler-icon"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                </button>&ndash;&gt;-->
+<!--                &lt;!&ndash;  <div class="collapse navbar-collapse" id="navbarNav">&ndash;&gt;-->
+<!--                <div class="navbar navbar-expand-md bg-info rounded">-->
+<!--                    <ul class="navbar-nav">-->
+<!--                        <li class="nav-item">-->
+<!--                            <a class="nav-link active" aria-current="page" href="/" th:text="#{'HOME'}">Home</a>-->
+<!--                        </li>-->
+<!--                        <li class="nav-item">-->
+<!--                            <a class="nav-link" href="/users/login" th:text="#{'LOGIN'}">Login</a>-->
+<!--                        </li>-->
+<!--                        <li class="nav-item">-->
+<!--                            <a class="nav-link" href="/users/logout" th:text="#{'LOGOUT'}">logout</a>-->
+<!--                        </li>-->
+<!--                        <li class="nav-item">-->
+<!--                            <a class="nav-link" href="/users/register" th:text="#{'REGISTER'}">register</a>-->
+<!--                        </li>-->
+<!--                        <li class="nav-item">-->
+<!--                            <a class="nav-link" href="/products/add" th:text="#{'PRODUCT_ADD'}">add product</a>-->
+<!--                        </li>-->
+<!--                        <li class="nav-item">-->
+<!--                            <a class="nav-link" href="/products" th:text="#{'PRODUCTS'}">products</a>-->
+<!--                        </li>-->
+<!--                        <li class="nav-item">-->
+<!--                            <a class="nav-link" href="/cart" th:text="#{'CART'}">cart</a>-->
+<!--                        </li>-->
+<!--&lt;!&ndash;                        <li class="nav-item">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <a class="nav-link disabled" aria-disabled="true">Disabled</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </li>&ndash;&gt;-->
 
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </nav>-->
 
-
-
-
-
-
-
-
-
-<!--<!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-    <title></title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  </head>
-  <body class="p-3 m-0 border-10 m-0 border-0">
-    <header class="row" th:fragment="nav">
-        <nav class="nav">
-          <ul class="nav-ul col-12">
-            <li><a class="nav-item" href="#">Login</a></li>
-            <li><a class="nav-item" href="#">Register</a></li>
-            <li><a class="nav-item" href="#">Home</a></li>
-            <li><a class="nav-item" href="#">Add Product</a></li>
-            <div class="nav-item dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Search
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Clothes</a></li>
-                <li><a class="dropdown-item" href="#">Foods</a></li>
-                <li><a class="dropdown-item" href="#">Drinks</a></li>
-                <li><a class="dropdown-item" href="#">Household</a></li>
-              </ul>
-            </div>
-          </ul>
-        </nav>
-    </header>
-  </body>
-</html>-->
+<!--    </header>-->
+<!--</body>-->
+<!--</html>-->

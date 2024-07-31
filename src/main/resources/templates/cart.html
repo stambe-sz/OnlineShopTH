@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<!-- <link rel="stylesheet" href="/static/css/style.css"> -->
-<head th:replace="fragments/head :: head"></head>
+ <link rel="stylesheet" href="/static/css/style2.css">
+<head th:replace="fragments/head2 :: head"></head>
 <body class="homePage">
-<header th:replace="fragments/navbar::navbar"></header>
+<header th:replace="fragments/navbar2::navbar"></header>
 <main>
     <div class="cart-wrapper">
-        <h1 class="cart-h1">Cart</h1>
-        <form th:action="@{/cart/get}" th:method="post">
+        <h1 class="cart-h1" th:text="#{'CART'}">Cart</h1>
+<!--        <form th:action="@{/order/get}" th:method="post">-->
             <table class="cart-table">
                 <thead>
                 <tr>
-                    <th>name</th>
-                    <th>description</th>
-                    <th>condition</th>
-                    <th>category</th>
-                    <th>quantity</th>
+                    <th th:text="#{'NAME'}">name</th>
+                    <th th:text="#{'DESCRIPTION'}">description</th>
+                    <th th:text="#{'CONDITION'}">condition</th>
+                    <th th:text="#{'CATEGORY'}">category</th>
+                    <th th:text="#{'QUANTITY'}">quantity</th>
                 </tr>
                 </thead>
                 <tbody th:each="p : ${allProducts}">
@@ -27,8 +27,9 @@
                     <td th:text="*{p.category.getCategoryName()}"></td>
                     <td th:text="*{p.orderQuantity}"></td>
                     <td th:text="*{p.price}"></td>
-                    <td><a class="cart-button"
+                    <td><a type="submit" class="cart-button"
                            th:href="@{/cart/remove-from-cart/{productId}(productId = ${p.getId()})}"
+                           th:text="#{'REMOVE'}"
                     >remove</a></td>
                 </tr>
                 </tbody>
@@ -39,7 +40,7 @@
                 <!--            </div>-->
             </table>
             <div class="cart-btn">
-                <button type="submit" class="cart-button">Order</button>
+                <a th:href="@{/order/get}" type="button" class="cart-button" th:text="#{'ORDER'}">Order</a>
             </div>
             <!-- TODO Бутон поръчка, дизайн
             -->
@@ -48,10 +49,8 @@
             1.Вземам всички ид-та на продуктите от количката, намирам ги в списък и ги показвам
             тук в подходящ вид
             -->
-        </form>
+<!--        </form>-->
     </div>
-
-
 </main>
 <div th:replace="fragments/footer :: footer"></div>
 </body>

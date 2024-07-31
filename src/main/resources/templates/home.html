@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet" href="/static/css/style.css">
 
-<div th:replace="fragments/head :: head"></div>
 
-<body class="container">
-    <div th:replace="fragments/navbar::navbar"></div>
+<head th:replace="fragments/head2 :: head"></head>
+<body class="homePage">
+<header th:replace="fragments/navbar2::navbar"></header>
+<main>
     <div class="container">
-        <h1>WELCOME TO ONLINESHOP</h1>
-        <!-- ... -->
-
+        <h1 class="title-h1" th:text="#{'WELCOME_TO_ONLINESHOP'}"></h1>
     </div>
-    <div th:replace="fragments/footer :: footer"></div>
+</main>
+<footer th:replace="fragments/footer::footer"></footer>
 </body>
-
 </html>

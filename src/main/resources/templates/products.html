@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org">
-<!-- <link rel="stylesheet" href="/static/css/style.css"> -->
-<head th:replace="fragments/head :: head"></head>
+<!-- <link rel="stylesheet" href="/static/css/style2.css">-->
+<!-- <link rel="stylesheet" th:href="@{../static/css/style2.css}">-->
+<!-- <link rel="stylesheet" href="/static/css/style2.css">-->
+<head th:replace="fragments/head2 :: head"></head>
+
 <body class="product_page">
-<header th:replace="fragments/navbar2::nav2"></header>
+<header th:replace="fragments/navbar2::navbar"></header>
 <main>
     <div class="product-wrapper">
-        <h1 class="product-page-h1">PRODUCTS</h1>
+        <h1 class="product-page-h1" th:text="#{'PRODUCTS'}">PRODUCTS</h1>
         <table class="cart-table">
             <thead>
             <tr>
-                <th>name</th>
-                <th>description</th>
-                <th>condition</th>
-                <th>category</th>
-                <th>quantity</th>
+                <th th:text="#{'NAME'}">name</th>
+                <th th:text="#{'DESCRIPTION'}">description</th>
+                <th th:text="#{'CONDITION'}">condition</th>
+                <th th:text="#{'CATEGORY'}">category</th>
+                <th th:text="#{'PRICE'}">price</th>
             </tr>
             </thead>
             <tbody th:each="p : ${products}">
@@ -24,117 +27,33 @@
                 <td th:text="*{p.description}"></td>
                 <td th:text="*{p.productCondition}"></td>
                 <td th:text="*{p.category.getCategoryName()}"></td>
-                <td th:text="*{p.quantity}"></td>
-                <td><button class="cart-button">buy</button></td>
+                <!-- <td th:text="*{p.quantity}"></td> -->
+                <td th:text="*{p.price}"></td>
+                
+                <td><button type="submit" class="cart-button" th:href="@{/cart/add-to-cart/{productId}(productId = ${p.getId()})}" th:text="#{'ADD_TO_CART'}">Add To Cart</button></td>
             </tr>
             </tbody>
+            
+            
+            <!-- 
+            <tbody th:each="p : ${products}">
+            <tr class="cart-table-row">
+                <td th:text="*{p.name}" th:field="*{addProductObject.name}"></td>
+                <td th:text="*{p.description}" th:field="*{addProductObject.description}"></td>
+                <td th:text="*{p.productCondition}" th:field="*{addProductObject.productCondition}"></td>
+                <td th:text="*{p.category.getCategoryName()}" th:field="*{addProductObject.getCategoryName()}"></td>
+                <td th:text="*{p.quantity}" th:field="*{addProductObject.quantity}"></td>
+                <td th:text="*{p.price}" th:field="*{addProductObject.price}"></td>
+                
+                <td><button class="cart-button" type="submit">Buy</button></td>
+            </tr>
+            </tbody>
+            th:action="@{/cart/add-to-cart{productId}(productId = ${product.getId()})}" th:method="POST" th:object="${addProductObject}"
+            <input hidden th:text="*{p.id}" th:field="*{addProductObject.id}"> -->
+            
         </table>
-        <!--        <style>-->
-        <!--            .image-wrapper {-->
-        <!--                width: 150px;-->
-        <!--                height: 150px;-->
-        <!--            }-->
-        <!--            .image {-->
-        <!--                display: block;-->
-        <!--                width: 100%;-->
-        <!--                height: 100%;-->
-        <!--            }-->
-        <!--            .products-wrapper {-->
-        <!--                opacity: 1;-->
-        <!--                display: flex;-->
-        <!--                flex-direction: row;-->
-        <!--                flex-wrap: wrap;-->
-        <!--            }-->
-        <!--            .product-wrapper {-->
-        <!--                opacity: 1;-->
-        <!--                display: flex;-->
-        <!--                flex-direction: row;-->
-        <!--                background-color: white !important;-->
-        <!--                padding: 15px;-->
-        <!--                box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);-->
-        <!--            }-->
-        <!--            .product-left-side {-->
-        <!--                padding: 15px;-->
-        <!--                display: flex;-->
-        <!--                flex-direction: column;-->
-        <!--                align-items: center;-->
-        <!--                justify-content: flex-start;-->
-        <!--            }-->
-        <!--            .product-right-side {-->
-        <!--                padding: 15px;-->
-        <!--                background-color: gray;-->
-        <!--                display: flex;-->
-        <!--                flex-direction: column;-->
-        <!--                align-items: center;-->
-        <!--                justify-content: flex-start;-->
-        <!--            }-->
-        <!--            .cac-wrapper {-->
-        <!--                display: flex;-->
-        <!--                flex-direction: row;-->
-        <!--                justify-content: space-between;-->
-        <!--                font-size: 12px;-->
-        <!--            }-->
-        <!--            form {-->
-        <!--                display: flex;-->
-        <!--                flex-direction: column;-->
-        <!--                align-items: center;-->
-        <!--                justify-content: flex-start;-->
-        <!--            }-->
-        <!--            input {-->
-        <!--                width: 45px;-->
-        <!--            }-->
-        <!--            .add-button {-->
-        <!--                outline: none;-->
-        <!--                border: none;-->
-        <!--                background-color: whitesmoke;-->
-        <!--                color: #2b2b2b;-->
-        <!--                transition: all 0.2s;-->
-        <!--            }-->
-        <!--            .add-button:hover {-->
-        <!--                background-color: #ffffcd;-->
-        <!--            }-->
-        <!--        </style>-->
-        <!--        <div class="products-wrapper">-->
-        <!--            <div class="product-wrapper" th:each="p : ${products}">-->
-        <!--                <div class="product-left-side">-->
-        <!--                    <div class="image-wrapper">-->
-        <!--                        <img class="image" src="#">-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--                <div class="product-right-side">-->
-        <!--                    <h3 class="product-title" th:text="|Name: *{p.name}|"></h3>-->
-        <!--                    <div class="cac-wrapper">-->
-        <!--                        <span class="product-condition" th:text="|Condition: *{p.productCondition}|"></span>-->
-        <!--                        <span class="product-category" th:text="|Category: *{p.category.getCategoryName()}|"></span>-->
-        <!--                    </div>-->
-        <!--                    <p th:text="|Description: *{p.description}|"></p>-->
-        <!--                    <form th:action="@{/cart/add-to-cart}" method="post">-->
-        <!--                        <input name="productId" th:value="${p.id}" hidden type="number">-->
-        <!--                        <input name="username" th:value="${username}" hidden type="text">-->
-        <!--                        <input name="quantity" type="number">-->
-        <!--                        <button class="add-button" type="submit">Add To Cart</button>-->
-        <!--                    </form>-->
-        <!--                </div>-->
-
-        <!--            <div th:each="p : ${products}" class="product-wrapper">-->
-        <!--                <p th:text="|Name: *{p.name}|" class="card-text border-bottom "></p>-->
-        <!--                <p th:text="|Description: *{p.description}|" class="card-text border-bottom "></p>-->
-        <!--                <p th:text="|Condition: *{p.productCondition}|" class="card-text border-bottom "></p>-->
-        <!--                &lt;!&ndash;            <p th:text="|Price: *{album.price}|" class="card-text border-bottom ">Price: 19.99</p>&ndash;&gt;-->
-        <!--                <p th:text="|Category: *{p.category.getCategoryName()}|" class="card-text border-bottom"></p>-->
-        <!--                <form th:action="@{/cart/add-to-cart}" method="post">-->
-        <!--                    <input name="productId" th:value="${p.id}" hidden type="number">-->
-        <!--                    <input name="username" th:value="${username}" hidden type="text">-->
-        <!--                    <input name="quantity" type="number">-->
-        <!--                    <button type="submit">Add To Cart</button>-->
-        <!--                </form>-->
-        <!--            </div>-->
-    </div>
-    </div>
-
-
     </div>
 </main>
-<div th:replace="fragments/footer :: footer"></div>
+<footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>

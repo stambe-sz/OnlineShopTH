@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/head :: head"></head>
-<body>
-<header th:replace="fragments/navbar::navbar"></header>
+<!--<link rel="stylesheet" href="/static/css/style2.css">-->
+
+<head th:replace="fragments/head2 :: head"></head>
+<body class="order_page">
+<header th:replace="fragments/navbar2::navbar"></header>
 <main>
     <div class="order-wrapper">
         <div>
             <h1 class="title-h1">Order</h1>
         </div>
-        <form th:action="@{/order}" th:method="post">
-            <div class="container-order">
-                <div class="order-text">
-                    <strong>Customer Name:</strong> <span th:text="${user.getUsername()}">John Doe</span><br>
-                    <strong>Total Amount:</strong> <span th:text="${totalAmount}"> 9.99</span><br>
-                    <strong>Items:</strong>
-                    <ul th:each="p:${userCartItems}">
-                        <li th:text="|Product: ${p.name}, Quantity: ${p.quantity}, Price: ${p.price}'$'|">Product 1 - Quantity: 1 Price: 10$</li>
-                    </ul>
-                    <div class="cart-btn">
-                        <button type="submit" class="cart-button">Send Order</button>
-                    </div>
-                </div>
-            </div>
-        </form>
+		<form th:action="@{/order/get/{username}(username=${user.username})}" th:method="post">
+			<div class="container-order">
+				<div class="order-text">
+					<strong th:text="#{'USERNAME'}">Customer Name:</strong> <span th:text="${user.getUsername()}">John Doe</span><br>
+					<strong th:text="#{'TOTAL_AMOUNT'}">Total Amount:</strong> <span th:text="${totalAmount}"> 9.99</span><br>
+					<strong th:text="#{'ITEMS'}">Items:</strong>
+					<ul th:each="p:${allOrderedProducts}">
+						<li th:text="|Product: ${p.name}, Quantity: ${p.orderQuantity}, Price: ${p.price}'$'|">Product 1 - Quantity: 1 Price: 10$</li>
+					</ul>
+					<div class="cart-btn">
+						<a type="submit" class="cart-button">Send Order</a>
+					</div>
+				</div>
+			</div>
+		</form>
     </div>
 </main>
 <footer th:replace="fragments/footer::footer"></footer>

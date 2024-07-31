@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/head2 :: head"></div>
 <body>
-
+	<header th:replace="fragments/navbar2::navbar"></header>
+	
+	<header th:replace="fragments/footer::footer"></header>
 </body>
 </html>
