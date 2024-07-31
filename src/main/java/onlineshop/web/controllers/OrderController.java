@@ -6,11 +6,15 @@ import onlineshop.model.service.CartItemServiceModel;
 import onlineshop.model.service.ProductServiceModel;
 import onlineshop.model.service.UserServiceModel;
 import onlineshop.model.view.ProductViewModel;
+import onlineshop.model.view.UserViewModel;
 import onlineshop.service.CartService;
+import onlineshop.service.ProductService;
 import onlineshop.service.UserService;
+import onlineshop.tools.Tools;
 import org.apache.catalina.filters.RemoteIpFilter;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,34 +32,51 @@ public class OrderController {
     private final UserService userService;
     private final ModelMapper modelMapper;
     private final CartService cartService;
+    private final ProductService productService;
+    private final Tools tools;
 
     @GetMapping
     public String getOrder() {
         return "orders";
     }
 
-    @GetMapping("/get/{username}")
-    public ModelAndView getHomePage(@PathVariable("username") String username, ModelAndView model) throws Exception {
-        //TODO ...
-
-        UserServiceModel foundUser =
-                userService.getUserByUsername(username);
-//        List<CartItemServiceModel> userItems =
-//                foundUser.getCart().getCartItems();
-        List<ProductViewModel> userCartItems = this.cartService.getUserCartItems(username);
-//        List<ProductViewModel> userProducts = this.cartService.getCartItems()
-//                .stream()
-//                .map(e -> modelMapper.map(e, ProductViewModel.class))
-//                .collect(Collectors.toList());
-        Double totalAmount = 0.0;
-        for (ProductViewModel userItem : userCartItems) {
-            totalAmount += userItem.getPrice();
+    @GetMapping("/get")
+    public ModelAndView getHomePage(ModelAndView model) throws Exception {
+        List<ProductViewModel> allOrderedProducts =
+                this.cartService.getCartItems()
+                        .stream().map(pr -> this.modelMapper.map(pr, ProductViewModel.class))
+                        .toList();
+        double totalAmount = 0;
+        for (ProductViewModel product : allOrderedProducts) {
+            totalAmount += product.getPrice() * product.getOrderQuantity();
         }
 
+        UserViewModel foundUser =
+                this.modelMapper.map(userService.getUserByUsername(
+                                this.tools.getLoggedUser()),
+                        UserViewModel.class);
+
         model.setViewName("orders");
-        model.addObject("userCartItems", userCartItems);
+        model.addObject("allOrderedProducts", allOrderedProducts);
         model.addObject("totalAmount", totalAmount);
         model.addObject("user", foundUser);
         return model;
     }
+
+    @GetMapping("/get/{username}")
+    public String getCart(@PathVariable("username") String username, Model model) throws Exception {
+        List<ProductViewModel> userCart = cartService.getUserCartItems(username);
+        userCart.forEach(e -> {
+            ProductServiceModel foundProduct =productService.getProductById(e.getId());
+            int newQuantity = foundProduct.getQuantity() - e.getQuantity();
+            if (newQuantity < 0){
+                throw new RuntimeException("Not enough quantity!");
+            }
+            foundProduct.setQuantity(newQuantity);
+            productService.editProduct(foundProduct);
+        });
+
+        return "products";
+    }
 }
+

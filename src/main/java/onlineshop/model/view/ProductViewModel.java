@@ -16,6 +16,8 @@ public class ProductViewModel extends BaseViewModel {
     private String name;
     private String description;
     private int quantity;
+    private int orderQuantity;
+    private double price;
     private Category category;
     private String productCondition;
     private List<String> images;
