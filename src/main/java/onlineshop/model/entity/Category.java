@@ -15,6 +15,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "categories")
 public class Category extends BaseEntity {
+	
     @Column(name = "category_name", nullable = false)
     private String categoryName;
 }

@@ -26,8 +26,9 @@ public class ProductController {
     private final ModelMapper modelMapper;
     private final Tools tools;
 
-    @GetMapping("")
+    @GetMapping
     public ModelAndView getProducts(ModelAndView model) {
+    	ProductAddBindingModel addProductObject = new ProductAddBindingModel();
         List<ProductServiceModel> allProducts = this.productService.getAll();
         List<ProductViewModel> products = allProducts.stream()
                 .map(e -> this.modelMapper.map(e, ProductViewModel.class))
@@ -35,6 +36,7 @@ public class ProductController {
         String username = this.tools.getLoggedUser();
         model.addObject("products", products);
         model.addObject("username", username);
+        model.addObject("addProductObject", addProductObject);
         model.setViewName("products");
         return model;
     }
@@ -58,11 +60,11 @@ public class ProductController {
 
     //@PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/add")
-    private String addProduct(@Valid ProductAddBindingModel productAddBindingModel){
-        productService.addProduct(modelMapper
-                .map(productAddBindingModel, ProductServiceModel.class));
+    public String addProduct(@Valid ProductAddBindingModel productAddBindingModel){
+        productService.addProduct(modelMapper.map(productAddBindingModel, ProductServiceModel.class));
         return "redirect:add";
     }
+    
     @ModelAttribute
     public ProductAddBindingModel productAddBindingModel(){
         return new ProductAddBindingModel();

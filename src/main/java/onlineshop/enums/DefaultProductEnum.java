@@ -1,10 +1,10 @@
 package onlineshop.enums;
 
+import java.util.ArrayList;
+
 import onlineshop.model.service.CategoryServiceModel;
 import onlineshop.model.service.ImageServiceModel;
 import onlineshop.model.service.ProductServiceModel;
-
-import java.util.ArrayList;
 
 public enum DefaultProductEnum {
 
@@ -12,15 +12,15 @@ public enum DefaultProductEnum {
             "banichka",
             "banichka sys sirene",
             5,
+            -1,
+            6.0,
             new CategoryServiceModel("food"),
             ProductConditionEnum.NEW.name(),
-            new ArrayList<ImageServiceModel>()))
-
-    ;
+            new ArrayList<ImageServiceModel>()));
 
     private ProductServiceModel product;
 
-    private DefaultProductEnum(ProductServiceModel product){
+    DefaultProductEnum(ProductServiceModel product) {
         this.product = product;
     }
 

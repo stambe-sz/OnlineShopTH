@@ -11,9 +11,11 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CartItemServiceModel {
-    private String username;
+public class CartItemServiceModel extends BaseServiceModel {
+
+	private String username;
     private Long productId;
     private Double price;
     private int quantity;
+    private String name;
 }

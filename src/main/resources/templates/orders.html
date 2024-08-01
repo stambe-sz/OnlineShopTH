@@ -11,7 +11,7 @@
         <div>
             <h1 class="title-h1">Order</h1>
         </div>
-		<form th:action="@{/order/get/{username}(username=${user.username})}" th:method="post">
+<!--		<form th:action="@{/order/get/{username}(username=${user.username})}" th:method="post">-->
 			<div class="container-order">
 				<div class="order-text">
 					<strong th:text="#{'USERNAME'}">Customer Name:</strong> <span th:text="${user.getUsername()}">John Doe</span><br>
@@ -21,11 +21,13 @@
 						<li th:text="|Product: ${p.name}, Quantity: ${p.orderQuantity}, Price: ${p.price}'$'|">Product 1 - Quantity: 1 Price: 10$</li>
 					</ul>
 					<div class="cart-btn">
-						<a type="submit" class="cart-button">Send Order</a>
+						<a class="cart-button"
+							th:href="@{/order/finish-order}"
+						>Send Order</a>
 					</div>
 				</div>
 			</div>
-		</form>
+<!--		</form>-->
     </div>
 </main>
 <footer th:replace="fragments/footer::footer"></footer>

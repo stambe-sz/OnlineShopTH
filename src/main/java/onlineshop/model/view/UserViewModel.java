@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import onlineshop.model.service.CartServiceModel;
+import onlineshop.model.service.RoleServiceModel;
 
 @Getter
 @Setter

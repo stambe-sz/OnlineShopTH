@@ -1,6 +1,7 @@
 package onlineshop.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import onlineshop.model.entity.Product;
 import onlineshop.model.service.CartItemServiceModel;
 import onlineshop.model.service.CartServiceModel;
 import onlineshop.model.service.ProductServiceModel;
@@ -51,7 +52,7 @@ public class CartServiceImpl implements CartService {
             if (cartItemSm == null) throw new Exception("Server Error 500 :)");
             cartItemSm.setQuantity(cartItemSm.getQuantity() + 1);
         } else {
-            itemsInCart.add(new CartItemServiceModel(tools.getLoggedUser(), productId, 0.0, 1 ));
+            itemsInCart.add(new CartItemServiceModel(tools.getLoggedUser(), productId, 0.0, 1 ,"kafe"));
         }
         this.userService.saveUserToDb(foundUser);
     }
@@ -135,12 +136,24 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public List<ProductViewModel> getUserCartItems(String username) throws Exception {
-        UserServiceModel foundUser = this.userService.getUserByUsername(tools.getLoggedUser());
+        UserServiceModel foundUser = this.userService.getUserByUsername(username);
         if (foundUser == null) throw new Exception("User not found");
         List<CartItemServiceModel> cartItems = foundUser.getCart().getCartItems();
-        List<ProductViewModel> cartViewItems =
-                cartItems.stream().map(p-> modelMapper.map(p,ProductViewModel.class)).toList();
+        List<ProductViewModel> cartViewItems = cartItems
+                .stream()
+                .map(p -> {
+                    ProductViewModel viewModel = new ProductViewModel();
+                    viewModel.setName(p.getName());
+                    viewModel.setQuantity(p.getQuantity());
+                    viewModel.setPrice(p.getPrice());
+                    viewModel.setId(p.getId());
+                    return viewModel;
+                }).collect(Collectors.toList());
+
+
 
         return cartViewItems;
     }
+    
+
 }

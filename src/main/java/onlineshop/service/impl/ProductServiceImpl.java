@@ -73,12 +73,13 @@ public class ProductServiceImpl implements ProductService {
         }
         return this.modelMapper.map(product, ProductServiceModel.class);
     }
-    private ProductServiceModel mapProduct(ProductServiceModel productFound, ProductServiceModel productServiceModel) {
+    public ProductServiceModel mapProduct(ProductServiceModel productFound, ProductServiceModel productServiceModel) {
         productFound.setProductCondition(productServiceModel.getProductCondition());
         productFound.setName(productServiceModel.getName());
         productFound.setQuantity(productServiceModel.getQuantity());
         productFound.setCategory(productServiceModel.getCategory());
         productFound.setDescription(productServiceModel.getDescription());
+        productFound.setPrice(productServiceModel.getPrice());
         return productFound;
     }
 }

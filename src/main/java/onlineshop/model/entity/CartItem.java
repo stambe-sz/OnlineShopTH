@@ -13,6 +13,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "cart_items")
 public class CartItem extends BaseEntity{
+
     @Column
     private String username;
     @Column
@@ -21,4 +22,6 @@ public class CartItem extends BaseEntity{
     private Double price;
     @Column
     private int quantity;
+    @Column
+    private String name;
 }

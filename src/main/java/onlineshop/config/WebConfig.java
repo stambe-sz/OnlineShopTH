@@ -10,11 +10,11 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    private final LocaleChangeInterceptor localeChangeInterceptor;
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-
-        registry.addInterceptor(localeChangeInterceptor);
-    }
+//    private final LocaleChangeInterceptor localeChangeInterceptor;
+//
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//
+//        registry.addInterceptor(localeChangeInterceptor);
+//    }
 }

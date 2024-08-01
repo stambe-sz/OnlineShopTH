@@ -14,4 +14,5 @@ import java.util.List;
 public class CartServiceModel extends BaseServiceModel{
     private String username;
     private List<CartItemServiceModel> cartItems;
+
 }

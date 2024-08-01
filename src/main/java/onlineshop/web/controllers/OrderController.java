@@ -41,7 +41,7 @@ public class OrderController {
     }
 
     @GetMapping("/get")
-    public ModelAndView getHomePage(ModelAndView model) throws Exception {
+    public ModelAndView getOrders(ModelAndView model) throws Exception {
         List<ProductViewModel> allOrderedProducts =
                 this.cartService.getCartItems()
                         .stream().map(pr -> this.modelMapper.map(pr, ProductViewModel.class))
@@ -53,7 +53,7 @@ public class OrderController {
 
         UserViewModel foundUser =
                 this.modelMapper.map(userService.getUserByUsername(
-                                this.tools.getLoggedUser()),
+                        this.tools.getLoggedUser()),
                         UserViewModel.class);
 
         model.setViewName("orders");
@@ -63,8 +63,8 @@ public class OrderController {
         return model;
     }
 
-    @GetMapping("/get/{username}")
-    public String getCart(@PathVariable("username") String username, Model model) throws Exception {
+    @GetMapping("/finish-order")
+    public String finishOrder(@PathVariable("username") String username, Model model) throws Exception {
         List<ProductViewModel> userCart = cartService.getUserCartItems(username);
         userCart.forEach(e -> {
             ProductServiceModel foundProduct =productService.getProductById(e.getId());
@@ -75,8 +75,11 @@ public class OrderController {
             foundProduct.setQuantity(newQuantity);
             productService.editProduct(foundProduct);
         });
-
+        //1.да се изтрие кошницата на потребителя, БЕЗ да се
+        //трие кощницата
+        //2.да се намали количеството на всеки продукт в базата
+        //3.да се запише в таблицата Order запис с информация за
+        //направения ордер
         return "products";
     }
 }
-

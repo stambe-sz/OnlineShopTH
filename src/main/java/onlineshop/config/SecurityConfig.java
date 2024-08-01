@@ -1,19 +1,22 @@
 package onlineshop.config;
 
 import lombok.RequiredArgsConstructor;
+import onlineshop.repository.UserRepository;
 import onlineshop.service.UserService;
+import onlineshop.service.impl.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @RequiredArgsConstructor
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity(debug = false)
 public class SecurityConfig {
 
     private final UserService userService;
@@ -42,7 +45,13 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests((auth) ->
                         auth
-                                .requestMatchers("/css/**", "/images/**", "/login", "/users/login", "/users/register", "/")
+                                .requestMatchers(
+                                        "/css/**", "/images/**",
+                                        "/login", "/users/login",
+                                        "/users/register", "/",
+                                        "/swagger-ui/**", "/v3/**",
+                                        "/h2-console/**"
+                                        )
                                 .permitAll()
 //                                .requestMatchers("/products/add").hasRole("ADMIN")
                                 .anyRequest()
@@ -86,7 +95,7 @@ public class SecurityConfig {
 //        userDetailsManager.createUser((UserDetails) user);
 //        return userDetailsManager;
 //    }
-
+    
 //    public String getCurrentUsername(){
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        if (authentication == null || !authentication.isAuthenticated()){

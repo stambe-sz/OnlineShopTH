@@ -18,16 +18,25 @@ public class Product extends BaseEntity {
 
     @Column(nullable = false)
     private String name;
+    
     @Column
     private String description;
+    
     @Column(nullable = false)
     private int quantity;
-    @OneToOne(cascade = CascadeType.ALL)
+    
+    @Column(nullable = false)
+    private Double price;
+    
+    @ManyToOne(cascade = CascadeType.ALL)
     private Category category;
+    
     @Column(name = "product_condition")
     private String productCondition;
+    
     @ElementCollection
     private List<String> images;
+
     @Column(name = "order_quantity")
     private int orderQuantity;
 }

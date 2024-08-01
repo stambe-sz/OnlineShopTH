@@ -15,6 +15,7 @@ import java.util.List;
 @Entity
 @Table(name = "carts")
 public class Cart extends BaseEntity{
+
     @Column(name = "username")
     private String username;
 

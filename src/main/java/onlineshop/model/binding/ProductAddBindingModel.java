@@ -3,9 +3,12 @@ package onlineshop.model.binding;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 import static onlineshop.constants.RegexValidation.*;
 
@@ -26,4 +29,5 @@ public class ProductAddBindingModel {
     private CategoryBindingModel category;
     @Pattern(regexp = PRODUCT_CONDITION_REGEX, message = PRODUCT_CONDITION_MSG)
     private String productCondition;
+    private List<String> images;
 }
