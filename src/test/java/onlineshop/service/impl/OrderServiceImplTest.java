@@ -3,6 +3,9 @@ package onlineshop.service.impl;
 import onlineshop.model.entity.Order;
 import onlineshop.model.service.OrderServiceModel;
 import onlineshop.repository.OrderRepository;
+import onlineshop.service.ProductService;
+import onlineshop.service.UserService;
+import onlineshop.tools.Tools;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,10 +23,17 @@ import static org.mockito.Mockito.when;
 public class OrderServiceImplTest {
 
     @MockBean
+    private UserService userService;
+    @MockBean
+    private ProductService productService;
+    @MockBean
     private OrderRepository orderRepository;
-
     @MockBean
     private ModelMapper modelMapper;
+    @MockBean
+    private Tools tools;
+
+
 
     @Test
     void whenCreateValidOrder_thenExpectBoolTrue() {
@@ -31,9 +41,9 @@ public class OrderServiceImplTest {
         OrderServiceModel orderServiceModel = new OrderServiceModel();
         Order order = new Order();
         when(modelMapper.map(orderServiceModel, Order.class)).thenReturn(order);
-        doNothing().when(orderRepository).save(order);
+//        doNothing().when(orderRepository).save(order);
 
-        OrderServiceImpl orderService = new OrderServiceImpl(orderRepository, modelMapper);
+        OrderServiceImpl orderService = new OrderServiceImpl( userService, productService,orderRepository, modelMapper,tools);
 
         // act
         boolean result = orderService.create(orderServiceModel);
@@ -54,7 +64,7 @@ public class OrderServiceImplTest {
         when(orderRepository.saveAndFlush(expectedOrder)).thenReturn(expectedOrder);
         when(modelMapper.map(expectedOrder, OrderServiceModel.class)).thenReturn(orderServiceModel);
 
-        OrderServiceImpl orderService = new OrderServiceImpl(orderRepository, modelMapper);
+        OrderServiceImpl orderService = new OrderServiceImpl( userService, productService,orderRepository, modelMapper,tools);
 
         // act
         OrderServiceModel result = orderService.update(orderServiceModel);
@@ -72,7 +82,7 @@ public class OrderServiceImplTest {
         when(orderRepository.findById(1L)).thenReturn(Optional.of(order));
         doNothing().when(orderRepository).delete(order);
 
-        OrderServiceImpl orderService = new OrderServiceImpl(orderRepository, modelMapper);
+        OrderServiceImpl orderService = new OrderServiceImpl( userService, productService,orderRepository, modelMapper,tools);
 
         // act
         boolean result = orderService.deleteById(1L);
@@ -86,7 +96,7 @@ public class OrderServiceImplTest {
         // arrange
         when(orderRepository.findById(1L)).thenReturn(Optional.empty());
 
-        OrderServiceImpl orderService = new OrderServiceImpl(orderRepository, modelMapper);
+        OrderServiceImpl orderService = new OrderServiceImpl( userService, productService,orderRepository, modelMapper,tools);
 
         // act and assert
         assertThrows(NoSuchElementException.class, () -> orderService.deleteById(1L));
@@ -101,7 +111,7 @@ public class OrderServiceImplTest {
         when(orderRepository.findOrderByUserUsername(username)).thenReturn(Optional.of(order));
         when(modelMapper.map(order, OrderServiceModel.class)).thenReturn(expectedModel);
 
-        OrderServiceImpl orderService = new OrderServiceImpl(orderRepository, modelMapper);
+        OrderServiceImpl orderService = new OrderServiceImpl( userService, productService,orderRepository, modelMapper,tools);
 
         // act
         OrderServiceModel result = orderService.findMyOrders(username);
@@ -115,7 +125,7 @@ public class OrderServiceImplTest {
         // arrange
         when(orderRepository.findOrderByUserUsername("username")).thenReturn(Optional.empty());
 
-        OrderServiceImpl orderService = new OrderServiceImpl(orderRepository, modelMapper);
+        OrderServiceImpl orderService = new OrderServiceImpl( userService, productService,orderRepository, modelMapper,tools);
 
         // act and assert
         assertThrows(NoSuchElementException.class, () -> orderService.findMyOrders("username"));
@@ -135,7 +145,7 @@ public class OrderServiceImplTest {
         when(modelMapper.map(order1, OrderServiceModel.class)).thenReturn(model1);
         when(modelMapper.map(order2, OrderServiceModel.class)).thenReturn(model2);
 
-        OrderServiceImpl orderService = new OrderServiceImpl(orderRepository, modelMapper);
+        OrderServiceImpl orderService = new OrderServiceImpl( userService, productService,orderRepository, modelMapper,tools);
 
         // act
         List<OrderServiceModel> result = orderService.getAll();
