@@ -12,7 +12,9 @@ public interface OrderService {
 
     boolean deleteById(Long orderId);
 
-    OrderServiceModel findMyOrders(Long userId);
+    OrderServiceModel findMyOrders(String username);
 
     List<OrderServiceModel> getAll();
+
+    void finishOrder() throws Exception;
 }
