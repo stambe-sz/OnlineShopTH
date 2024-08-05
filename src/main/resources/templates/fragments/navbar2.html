@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-<!--    <link rel="stylesheet" type="text/css" href="/css/style.css">-->
-<!--    <link rel="stylesheet" th:href="@{../static/css/style2.css}">-->
+    <!--    <link rel="stylesheet" type="text/css" href="/css/style.css">-->
+    <!--    <link rel="stylesheet" th:href="@{../static/css/style2.css}">-->
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
@@ -41,13 +41,13 @@
             <li class="list">
                 <a  href="/products">
                     <span class="icon">
-                        <ion-icon name="logo-dropbox"></ion-icon>
+                        <ion-icon name="storefront-outline"></ion-icon>
                     </span>
                     <span class="text" th:text="#{'PRODUCTS'}">Products</span>
                 </a>
             </li>
             <li class="list">
-                <a  href="/cart">
+                <a sec:authorize="isAuthenticated()" href="/cart">
                     <span class="icon">
                         <ion-icon name="cart-outline"></ion-icon>
                     </span>
@@ -65,27 +65,11 @@
             <li th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" class="list">
                 <a href="/products/add">
                     <span class="icon">
-                        <ion-icon name="bag-add-outline"></ion-icon>
+                        <ion-icon name="add-circle-outline"></ion-icon>
                     </span>
                     <span class="text" th:text="#{'PRODUCT_ADD'}">Add Product</span>
                 </a>
             </li>
-            <li sec:authorize="isAuthenticated()" class="list">
-                <a href="#">
-                    <span class="icon">
-                        <ion-icon name="search-outline"></ion-icon>
-                    </span>
-                    <span type="button" class="text btn btn-secondary dropdown-toggle">
-                        <select name="" id="dropdown">
-                        <option value="Search">Search</option>
-                        <option value="option2">Опция 2</option>
-                        <option value="option3">Опция 3</option>
-                        <option value="option4">Опция 4</option>
-                    </select>
-                    </span>
-                </a>
-            </li>
-
             <div class="indicator"></div>
             <div class="lang-btn">
                 <button type="button" th:text="#{switch-en}" onclick="window.location.href='http://localhost:8080/?localeData=en'"></button> <!-- 3 -->

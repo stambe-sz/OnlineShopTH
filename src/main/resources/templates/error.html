@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<div th:replace="fragments/head2 :: head"></div>
-<body>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<!--todo: replace div with header-->
+<head th:replace="fragments/head2 :: head"></head>
+
+<body class="login_page">
 <header th:replace="fragments/navbar2::navbar"></header>
 <main>
-    <div th:fragment="error" class="">
-        <h2 th:text="${#{'ERROR_PAGE'}}" class="page-title"></h2>
-        <h1>Something went wrong!</h1>
-        <p th:text="${message}">An error occurred</p>
-        <p th:text="${status}">Status: 500</p>
+    <div class="container">
+        <h1  class="product-page-h1" th:text="#{'SOMETHING_WENT_WRONG'}">something went wrong</h1>
     </div>
 </main>
 </body>
