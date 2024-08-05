@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org">
 <!-- <link rel="stylesheet" href="/static/css/style2.css">-->
 <!-- <link rel="stylesheet" th:href="@{../static/css/style2.css}">-->
 <!-- <link rel="stylesheet" href="/static/css/style2.css">-->
@@ -21,20 +21,30 @@
                 <th th:text="#{'PRICE'}">price</th>
             </tr>
             </thead>
-            <tbody th:each="p : ${products}">
-            <tr class="cart-table-row">
-                <td th:text="*{p.name}"></td>
-                <td th:text="*{p.description}"></td>
-                <td th:text="*{p.productCondition}"></td>
-                <td th:text="*{p.category.getCategoryName()}"></td>
-                <!-- <td th:text="*{p.quantity}"></td> -->
-                <td th:text="*{p.price}"></td>
-                
-                <td><button type="submit" class="cart-button" th:href="@{/cart/add-to-cart/{productId}(productId = ${p.getId()})}" th:text="#{'ADD_TO_CART'}">Add To Cart</button></td>
-            </tr>
+            <tbody>
+            <th:block th:each="p : ${products}">
+                <tr class="cart-table-row">
+                    <td>
+                        <h3 th:text="*{p.name}"></h3>
+                        <div class="product-photo-wrapper">
+                            <img class="product-photo" th:src="*{p.photoUrl}">
+                        </div>
+                    </td>
+                    <td th:text="*{p.description}"></td>
+                    <td th:text="*{p.productCondition}"></td>
+                    <td th:text="*{p.category.getCategoryName()}"></td>
+                    <!-- <td th:text="*{p.quantity}"></td> -->
+                    <td th:text="*{p.price}"></td>
+
+                    <td><a class="cart-button" th:href="@{/cart/add-to-cart/{productId}(productId = ${p.getId()})}" th:text="#{'ADD_TO_CART'}">Add To Cart</a></td>
+                    <td><a class="cart-button" th:href="@{/products/edit/{productId}(productId = ${p.getId()})}" th:text="#{'EDIT'}">edit</a></td>
+                    <td><a class="cart-button" th:href="@{/products/delete/{productId}(productId = ${p.getId()})}" th:text="#{'DELETE'}">delete</a></td>
+                </tr>
+            </th:block>
+
             </tbody>
-            
-            
+
+
             <!-- 
             <tbody th:each="p : ${products}">
             <tr class="cart-table-row">
@@ -50,10 +60,9 @@
             </tbody>
             th:action="@{/cart/add-to-cart{productId}(productId = ${product.getId()})}" th:method="POST" th:object="${addProductObject}"
             <input hidden th:text="*{p.id}" th:field="*{addProductObject.id}"> -->
-            
+
         </table>
     </div>
 </main>
-<footer th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>
