@@ -8,11 +8,9 @@ import onlineshop.model.view.ProductViewModel;
 import onlineshop.service.ProductService;
 import onlineshop.tools.Tools;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -28,7 +26,7 @@ public class ProductController {
 
     @GetMapping
     public ModelAndView getProducts(ModelAndView model) {
-    	ProductAddBindingModel addProductObject = new ProductAddBindingModel();
+        ProductAddBindingModel addProductObject = new ProductAddBindingModel();
         List<ProductServiceModel> allProducts = this.productService.getAll();
         List<ProductViewModel> products = allProducts.stream()
                 .map(e -> this.modelMapper.map(e, ProductViewModel.class))
@@ -41,7 +39,7 @@ public class ProductController {
         return model;
     }
 
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/add")
     public String getAddProduct() {
         return "product-add";
@@ -58,15 +56,38 @@ public class ProductController {
         return model;
     }
 
-    //@PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/add")
-    public String addProduct(@Valid ProductAddBindingModel productAddBindingModel){
+    public String addProduct(@Valid ProductAddBindingModel productAddBindingModel) {
         productService.addProduct(modelMapper.map(productAddBindingModel, ProductServiceModel.class));
         return "redirect:add";
     }
-    
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @DeleteMapping("/delete/{productId}")
+    public String deleteProduct(@PathVariable("productId") Long productId) {
+        productService.deleteProductById(productId);
+        return "redirect:/products";
+    }
+
+    @GetMapping("/edit/{id}")
+    public ModelAndView editProduct(@PathVariable Long id, ModelAndView modelAndView) {
+        ProductServiceModel foundProduct = productService.getProductById(id);
+        ProductViewModel productForEdit = modelMapper.map(foundProduct, ProductViewModel.class);
+        productService.editProduct(foundProduct);
+        modelAndView.addObject("productForEdit", productForEdit);
+        modelAndView.setViewName("product-edit");
+        return modelAndView;
+    }
+
+//    @PostMapping("/edit/{id}")
+//    public String editProduct(@PathVariable Long id,@Valid ProductEditBindingModel productEditBindingModel) {
+//        productService.editProduct(modelMapper.map(productEditBindingModel,ProductServiceModel.class));
+//        return "redirect:edit";
+//    }
+
     @ModelAttribute
-    public ProductAddBindingModel productAddBindingModel(){
+    public ProductAddBindingModel productAddBindingModel() {
         return new ProductAddBindingModel();
     }
 }

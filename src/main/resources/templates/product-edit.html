@@ -7,9 +7,10 @@
 <link rel="stylesheet" href="/static/css/style2.css">
 <body class="addProduct">
 <header th:replace="fragments/navbar2::navbar"></header>
-<div class="">
-	<form class="form-login" th:action="@{/products/edit}" th:method="GET" th:object="${productForEdit}" enctype="multipart/form-data">
-		<div class="col-12">
+<div>
+    <h1 class="product-page-h1" >EDIT PRODUCT</h1>
+	<form class="form-login" th:action="@{/products/edit}" th:method="POST" th:object="${productAddBindingModel}" enctype="multipart/form-data">
+		<div th:object="${productForEdit}"  class="col-12">
 			<div class="form-group text-center">
 				<label>
 					<p th:text="#{NAME}">Name</p>
@@ -19,41 +20,41 @@
 				</label>
 			</div>
 		</div>
-		<div class="col-12">
+		<div th:object="${productForEdit}" class="col-12">
 			<div class="form-group text-center">
 				<label>
 					<p th:text="#{'DESCRIPTION'}">Description</p>
-					<input th:field="*{description}" th:errorclass="is-invalid" type="text"
+					<input th:field="*{description}" th:errorclass="is-invalid" th:value="*{description}" type="text"
 						   class="form-control" name="description" aria-describedby="helpId" placeholder="Description...">
 					<small class="form-text text-muted">Error message</small>
 				</label>
 			</div>
 		</div>
-		<div class="col-12">
+		<div th:object="${productForEdit}" class="col-12">
 			<div class="form-group text-center">
 				<label>
 					<p th:text="#{'QUANTITY'}">Quantity</p>
-					<input th:field="*{quantity}" th:errorclass="is-invalid" type="text"
+					<input th:field="*{quantity}" th:errorclass="is-invalid" th:value="*{quantity}" type="text"
 						   class="form-control" name="quantity" aria-describedby="helpId" placeholder="Quantity...">
 					<small class="form-text text-muted">Error message</small>
 				</label>
 			</div>
 		</div>
-		<div class="col-12">
+		<div th:object="${productForEdit}" class="col-12">
 			<div class="form-group text-center">
 				<label>
 					<p th:text="#{'PRICE'}">Price</p>
-					<input th:field="*{price}" th:errorclass="is-invalid" type="text"
+					<input th:field="*{price}" th:errorclass="is-invalid" th:value="*{price}" type="text"
 						   class="form-control" name="price" aria-describedby="helpId" placeholder="Price...">
 					<small class="form-text text-muted">Error message</small>
 				</label>
 			</div>
 		</div>
-		<div class="col-12">
+		<div th:object="${productForEdit}" class="col-12">
 			<div class="form-group text-center">
 				<label>
 					<p th:text="#{'IMAGE'}">Image</p>
-					<input th:field="*{images}" th:errorclass="is-invalid" type="text"
+					<input th:field="*{images}" th:errorclass="is-invalid" th:value="*{images}" type="text"
 						   class="form-control" name="images" aria-describedby="helpId" placeholder="Image...">
 					<small id="helpId" class="form-text text-muted">Error message</small>
 				</label>
@@ -64,14 +65,14 @@
 		>
 			<option selected value="">Category</option>
 			<option th:each="c : ${T(onlineshop.enums.CategoryEnum).values()}"
-					th:text="${c}" th:value="${c}">Food</option>
+					th:text="${c}" th:value="${c}" >Food</option>
 		</select>
 		<select th:field="*{productCondition}" class="form-select form-select-sm" aria-label=".form-select-sm example">
 			<option selected value="">Condition</option>
 			<option th:each="pC : ${T(onlineshop.enums.ProductConditionEnum).values()}" th:text="${pC}" th:value="${pC}">New</option>
 		</select>
 		<div>
-			<button type="submit" class="cart-button" th:text="#{'ADD_PRODUCT'}">Add Product</button>
+			<button type="submit" class="cart-button" >edit</button>
 		</div>
 	</form>
 </div>
