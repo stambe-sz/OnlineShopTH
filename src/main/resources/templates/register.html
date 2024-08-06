@@ -12,65 +12,80 @@
             <div class="row mt-5">
                 <div class="col-12">
                     <div class="form-group text-center">
-                        <p>Username</p>
-                        <input th:field="*{username}" th:errorclass="is-invalid" type="text"
-                               class="form-control" name="" aria-describedby="helpId" placeholder="Your username...">
-                        <small class="form-text text-muted">Error message</small>
+                        <label>
+                            <p>Username</p>
+                            <input th:field="*{username}" th:errorclass="is-invalid" type="text"
+                                   class="form-control" name="" aria-describedby="helpId"
+                                   placeholder="Your username...">
+                            <small class="form-text text-muted">Error message</small>
+                        </label>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="form-group text-center">
-                        <p>First name</p>
-                        <input th:field="*{firstName}" th:errorclass="is-invalid" type="text"
-                               class="form-control" name="" aria-describedby="helpId" placeholder="first name...">
-                        <small class="form-text text-muted">Error message</small>
+                        <label>
+                            <p>First name</p>
+                            <input th:field="*{firstName}" th:errorclass="is-invalid" type="text"
+                                   class="form-control" name="" aria-describedby="helpId" placeholder="first name...">
+                            <small class="form-text text-muted">Error message</small>
+                        </label>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="form-group text-center">
-                        <p>Last name</p>
-                        <input th:field="*{lastName}" th:errorclass="is-invalid" type="text"
-                               class="form-control" name="" aria-describedby="helpId" placeholder="last name...">
-                        <small class="form-text text-muted">Error message</small>
+                        <label>
+                            <p>Last name</p>
+                            <input th:field="*{lastName}" th:errorclass="is-invalid" type="text"
+                                   class="form-control" name="" aria-describedby="helpId" placeholder="last name...">
+                            <small class="form-text text-muted">Error message</small>
+                        </label>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="form-group text-center">
-                        <p>email</p>
-                        <input th:field="*{email}" th:errorclass="is-invalid" type="text"
-                               class="form-control" name="" aria-describedby="helpId" placeholder="email...">
-                        <small class="form-text text-muted">Error message</small>
+                        <label>
+                            <p>email</p>
+                            <input th:field="*{email}" th:errorclass="is-invalid" type="text"
+                                   class="form-control" name="" aria-describedby="helpId" placeholder="email...">
+                            <small class="form-text text-muted">Error message</small>
+                        </label>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="form-group text-center">
-                        <p>Address</p>
-                        <input th:field="*{address}" th:errorclass="is-invalid" type="text"
-                               class="form-control" name="" aria-describedby="helpId" placeholder="address...">
-                        <small class="form-text text-muted">Error message</small>
+                        <label>
+                            <p>Address</p>
+                            <input th:field="*{address}" th:errorclass="is-invalid" type="text"
+                                   class="form-control" name="" aria-describedby="helpId" placeholder="address...">
+                            <small class="form-text text-muted">Error message</small>
+                        </label>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="form-group text-center">
-                        <p>Password</p>
-                        <input th:field="*{password}" th:errorclass="is-invalid" type="password"
-                               class="form-control" name="" aria-describedby="helpId" placeholder="Your pasword...">
-                        <small class="form-text text-muted">Help text</small>
+                        <label>
+                            <p>Password</p>
+                            <input th:field="*{password}" th:errorclass="is-invalid" type="password"
+                                   class="form-control" name="" aria-describedby="helpId" placeholder="Your pasword...">
+                            <small class="form-text text-muted">Help text</small>
+                        </label>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="form-group text-center">
-                        <p>Confirm Password</p>
-                        <input th:field="*{confirmPassword}" th:errorclass="is-invalid" type="password"
-                               class="form-control" name="" id="" aria-describedby="helpId"
-                               placeholder="Your pasword...">
-                        <small id="helpId" class="form-text text-muted">Help text</small>
+                        <label>
+                            <p>Confirm Password</p>
+                            <input th:field="*{confirmPassword}" th:errorclass="is-invalid" type="password"
+                                   class="form-control" name="" id="" aria-describedby="helpId"
+                                   placeholder="Your pasword...">
+                            <small id="helpId" class="form-text text-muted">Help text</small>
+                        </label>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <button type="submit" class="btn btn-primary">Register</button>
+                    <button type="submit" class="btn-default">Register</button>
                 </div>
             </div>
         </form>

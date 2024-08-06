@@ -3,8 +3,8 @@
       xmlns:th="http://www.thymeleaf.org">
 <!--todo: replace div with header-->
 <head th:replace="fragments/head2 :: head"></head>
- <link rel="stylesheet" th:href="@{../static/css/style.css}">
- <link rel="stylesheet" href="/static/css/style.css">
+<!-- <link rel="stylesheet" th:href="@{../static/css/style.css}">-->
+<!-- <link rel="stylesheet" href="/static/css/style.css">-->
 
 <body class="login_page">
 <header th:replace="fragments/navbar2::navbar"></header>
@@ -21,10 +21,9 @@
                 <input th:field="*{password}" th:errorclass="is-invalid" id="password" name="password" type="password">
                 <small>Error message</small>
             </label>
-            <button type="submit" class="cart-button" th:text="#{'LOGIN'}">Login</button>
+            <button type="submit" class="btn-default" th:text="#{'LOGIN'}">Login</button>
         </form>
     </div>
 </main>
 </body>
-<div th:replace="fragments/footer :: footer"></div>
 </html>

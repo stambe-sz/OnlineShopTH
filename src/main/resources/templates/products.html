@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <!-- <link rel="stylesheet" href="/static/css/style2.css">-->
 <!-- <link rel="stylesheet" th:href="@{../static/css/style2.css}">-->
 <!-- <link rel="stylesheet" href="/static/css/style2.css">-->
@@ -37,8 +38,9 @@
                     <td th:text="*{p.price}"></td>
 
                     <td><a class="cart-button" th:href="@{/cart/add-to-cart/{productId}(productId = ${p.getId()})}" th:text="#{'ADD_TO_CART'}">Add To Cart</a></td>
-                    <td><a class="cart-button" th:href="@{/products/edit/{productId}(productId = ${p.getId()})}" th:text="#{'EDIT'}">edit</a></td>
-                    <td><a class="cart-button" th:href="@{/products/delete/{productId}(productId = ${p.getId()})}" th:text="#{'DELETE'}">delete</a></td>
+                    <td th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"><a class="cart-button" th:href="@{/products/edit/{productId}(productId = ${p.id})}" th:text="#{'EDIT'}">edit</a></td>
+                    <td th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}"><a class="cart-button" th:href="@{/products/delete/{productId}(productId = ${p.id})}" th:text="#{'DELETE'}">delete</a></td>
+
                 </tr>
             </th:block>
 
