@@ -15,6 +15,4 @@ public interface OrderService {
     OrderServiceModel findMyOrders(String username);
 
     List<OrderServiceModel> getAll();
-
-    void finishOrder() throws Exception;
 }

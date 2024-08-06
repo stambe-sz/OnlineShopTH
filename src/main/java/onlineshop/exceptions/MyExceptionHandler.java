@@ -12,15 +12,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class MyExceptionHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(MyExceptionHandler.class);
+    private static final String LOG_FILE_PATH = "errors.log";
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String handleException(Exception ex, Model model) {
-        logger.error("Exception occurred: ", ex);
         model.addAttribute("message", ex.getMessage());
         model.addAttribute("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
-        model.addAttribute("page", "error");
-        model.addAttribute("pageTitle", "ERROR_PAGE");
         return "error";
     }
 }

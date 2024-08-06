@@ -15,6 +15,7 @@ import java.util.NoSuchElementException;
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
     private final ModelMapper modelMapper;
+
     @Override
     public CategoryServiceModel getById(Long id) {
         Category category = this.categoryRepository

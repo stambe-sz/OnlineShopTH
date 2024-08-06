@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @RequiredArgsConstructor
@@ -19,7 +18,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
         return userRepository
                 .findUserByUsername(username)
                 .map(CustomUserDetailsService::map)

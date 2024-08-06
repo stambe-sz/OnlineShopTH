@@ -1,11 +1,9 @@
 package onlineshop.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import onlineshop.enums.RoleEnum;
 import onlineshop.model.entity.Role;
 import onlineshop.repository.RoleRepository;
 import onlineshop.service.RoleService;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,7 +1,6 @@
 package onlineshop.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import onlineshop.model.entity.Product;
 import onlineshop.model.service.CartItemServiceModel;
 import onlineshop.model.service.CartServiceModel;
 import onlineshop.model.service.ProductServiceModel;
@@ -63,7 +62,6 @@ public class CartServiceImpl implements CartService {
         UserServiceModel foundUser = userService.getUserByUsername(loggedUser);
         List<CartItemServiceModel> cartList = foundUser.getCart().getCartItems();
         Map<Long, Integer> items = new HashMap<>();
-
         for (CartItemServiceModel currentItem : cartList) {
             if (items.containsKey(currentItem.getProductId())) {
                 items.put(currentItem.getProductId(),
@@ -83,11 +81,10 @@ public class CartServiceImpl implements CartService {
             foundUser.setCart(null);
             userService.saveUserToDb(foundUser);
         }
-
         return foundProducts;
     }
 
-
+    @Deprecated
     public List<ProductServiceModel> getCartItems2() throws Exception {
         String loggedUser = tools.getLoggedUser();
         UserServiceModel foundUser = userService.getUserByUsername(loggedUser);
@@ -126,7 +123,7 @@ public class CartServiceImpl implements CartService {
                     item.setQuantity(item.getQuantity() - 1);
                     foundUser.getCart().setCartItems(cartItems);
                 } else {
-                    cartItems.clear();
+                    cartItems.remove(item);
                     break;
                 }
             }
@@ -154,6 +151,6 @@ public class CartServiceImpl implements CartService {
 
         return cartViewItems;
     }
-    
+
 
 }

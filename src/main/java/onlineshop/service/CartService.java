@@ -1,13 +1,8 @@
 package onlineshop.service;
 
-import onlineshop.model.entity.Cart;
-import onlineshop.model.entity.CartItem;
-import onlineshop.model.entity.Product;
-import onlineshop.model.service.CartItemServiceModel;
 import onlineshop.model.service.ProductServiceModel;
 import onlineshop.model.view.ProductViewModel;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public interface CartService {

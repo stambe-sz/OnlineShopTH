@@ -8,13 +8,10 @@ import onlineshop.repository.UserRepository;
 import onlineshop.service.RoleService;
 import onlineshop.service.UserService;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
