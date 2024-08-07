@@ -6,6 +6,43 @@
 /*    background-color: rgb(234, 241, 239);*/
 /*}*/
 
+.product-photo-wrapper {
+
+}
+
+.product-photo {
+    padding: 10px;
+    width: 150px;
+    height: 150px;
+    display: block;
+}
+
+label {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    color: white
+}
+
+input, select {
+    margin-top: 5px;
+    padding: 7px;
+}
+
+footer {
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    background-color: rgba(82, 82, 247, 70%);
+}
+
+.btn-default {
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 7px 15px;
+
+}
+
 .bg-nav{
     display: inline-block;
     border: 2px solid black;
@@ -13,7 +50,7 @@
     background-color: black;
     height: 20vh;
     padding: 20px;
-    
+
 }
 .bg-nav{
     background-color: rgba(1, 141, 8, 0);
@@ -25,12 +62,9 @@
 }
 .homePage{
     background-image: url("../images/home_page3.jpg");
-    /*background-image: url("static/images/home_page3.jpg");*/
     background-size: cover;
 }
 .login_page{
-    /*background-image: url("../images/login_page4.jpg");*/
-    /*background-image: url("static/images/login_page4.jpg");*/
     background-image: url("../images/login_page4.jpg");
     background-size: cover;
 }
@@ -42,6 +76,7 @@
     /*z-index: -100;*/
     background-image: url("../images/products_page.jpg");
     background-size: cover;
+    /*filter: blur(5px);*/
     /*background-image: url("static/images/product_page.jpg");*/
 }
 .order_page{
@@ -66,7 +101,7 @@
     box-sizing: border-box;
       margin: 0;
       padding: 0;
-      
+
 }
 .nav-ul > li {
     display: inline-block;
@@ -113,12 +148,11 @@ body
     min-height: 100vh;
     background: var(--clr);
 }
-.navigation
-{
+.navigation {
     /*navbar wight*/
     width: 670px;
     height: 70px;
-    background: #5252f4;
+    background: rgba(82, 82, 245, 70%);
     position: relative;
     display: flex;
     justify-content: flex-end;
@@ -130,8 +164,7 @@ body
     /*move icons left right - 540px*/
     width: 540px;
 }
-.navigation ul li
-{
+.navigation ul li {
     position: relative;
     list-style: none;
     width: 70px;
@@ -254,7 +287,8 @@ body
 .form-login{
     margin: 10px auto;
     padding: 50px;
-    /* background-color:#f5f6f7; */
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -282,7 +316,7 @@ body
 /*}*/
 .product-page-h1 {
     color: blue;
-    background-color: #0dcaf0;
+    background-color: rgba(255, 255, 255, 0.9);
     text-align: center;
     margin: 10px;
 }
@@ -292,15 +326,16 @@ body
     margin: 10px;
 }
 .cart-table {
+    color: white;
     width: 100%;
     border-collapse: collapse;
-    background-color: #997404;
+    background-color: rgba(82, 82, 245, 70%);
     opacity: 1;
     height: 50px;
 }
 .cart-table-row{
-    background-color: pink;
-    opacity: 0.7;
+    /*background-color: pink;*/
+    /*opacity: 0.7;*/
 }
 .cart-table, table, tbody, tr, td{
     text-align: center;

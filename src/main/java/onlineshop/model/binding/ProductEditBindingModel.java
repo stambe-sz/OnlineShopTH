@@ -10,7 +10,6 @@ import lombok.Setter;
 import java.util.List;
 
 import static onlineshop.constants.RegexValidation.*;
-import static onlineshop.constants.RegexValidation.PRODUCT_CONDITION_MSG;
 
 @Getter
 @Setter

@@ -9,7 +9,8 @@ import onlineshop.model.entity.CartItem;
 
 import java.util.List;
 
-import static onlineshop.constants.RegexValidation.*;
+import static onlineshop.constants.RegexValidation.USERNAME_REGEX;
+import static onlineshop.constants.RegexValidation.USERNAME_REGEX_ERROR_MSG;
 
 @Getter
 @Setter

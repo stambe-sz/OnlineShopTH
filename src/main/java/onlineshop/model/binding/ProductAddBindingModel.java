@@ -3,7 +3,6 @@ package onlineshop.model.binding;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,4 +29,6 @@ public class ProductAddBindingModel {
     @Pattern(regexp = PRODUCT_CONDITION_REGEX, message = PRODUCT_CONDITION_MSG)
     private String productCondition;
     private List<String> images;
+
+    private String photoUrl;
 }
