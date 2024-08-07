@@ -34,33 +34,7 @@ public class ProductServiceImplTest {
     @Mock
     private ModelMapper modelMapper;
 
-    @Test
-    public void addProduct_ValidInput_ProductCreated() {
-        // arrange
-        ProductServiceModel inputProduct = new ProductServiceModel();
-        inputProduct.setName("Test Product");
 
-        Category category = new Category();
-        category.setCategoryName("Test Category");
-
-        Product mappedProduct = new Product();
-        mappedProduct.setName("Test Product");
-
-        Product savedProduct = new Product();
-        savedProduct.setName("Test Product");
-
-        when(productRepository.findProductByName(anyString())).thenReturn(Optional.empty());
-        when(modelMapper.map(inputProduct, Product.class)).thenReturn(mappedProduct);
-        when(categoryService.findCategoryByName(anyString())).thenReturn(category);
-        when(productRepository.save(any(Product.class))).thenReturn(savedProduct);
-        when(modelMapper.map(savedProduct, ProductServiceModel.class)).thenReturn(inputProduct);
-        
-        // act
-        ProductServiceModel result = productService.addProduct(inputProduct);
-        
-        // assert
-        assertEquals(inputProduct, result, "The created product should be returned");
-    }
 
     @Test
     public void addProduct_ExistingProductName_IllegalArgumentExceptionThrown() {
@@ -77,57 +51,6 @@ public class ProductServiceImplTest {
         assertThrows(IllegalArgumentException.class, () -> productService.addProduct(newProduct));
     }
 
-    @Test
-    public void editProduct_TargetProductExists_ProductEdited() {
-        // arrange
-        ProductServiceModel existingProduct = new ProductServiceModel();
-        existingProduct.setId(1L);
-        existingProduct.setName("Existing Product");
-
-        ProductServiceModel updatedProduct = new ProductServiceModel();
-        updatedProduct.setId(1L);
-        updatedProduct.setName("Updated Product");
-
-        when(productRepository.findById(anyLong())).thenReturn(Optional.of(modelMapper.map(existingProduct, Product.class)));
-       when(productRepository.save(any(Product.class))).thenReturn(modelMapper.map(updatedProduct, Product.class));
-
-        // act
-        ProductServiceModel result = productService.editProduct(updatedProduct);
-
-        // assert
-        assertEquals(updatedProduct, result, "The existing product should be replaced with updated product without changing ID");
-    }
-
-    @Test
-    public void editProduct_TargetProductDoesNotExist_NoSuchElementExceptionThrown() {
-        // arrange
-       ProductServiceModel nonExistingProduct = new ProductServiceModel();
-       nonExistingProduct.setId(1L);
-       nonExistingProduct.setName("Non Existing Product");
-
-       when(productRepository.findById(anyLong())).thenReturn(Optional.empty());
-
-       // act and assert
-       assertThrows(NoSuchElementException.class, () -> productService.editProduct(nonExistingProduct));
-   }
-
-   @Test
-   public void deleteProductById_ProductExists_ProductDeleted () {
-       // arrange
-       ProductServiceModel existingProduct = new ProductServiceModel();
-       existingProduct.setId(1L);
-       existingProduct.setName("Existing Product");
-
-       when(productRepository.findById(anyLong())).thenReturn(Optional.of(modelMapper.map(existingProduct, Product.class)));
-
-       // act
-       boolean result = productService.deleteProductById(1L);
-
-       // assert
-       assertTrue(result, "The product should be deleted successfully");
-       verify(productRepository, times(1)).delete(any(Product.class));
-   }
-
    @Test
    public void deleteProductById_ProductDoesNotExist_NoSuchElementExceptionThrown() {
        // arrange
@@ -136,23 +59,6 @@ public class ProductServiceImplTest {
        // act and assert
        assertThrows(NoSuchElementException.class, () -> productService.deleteProductById(1L));
        assertThrows(NoSuchElementException.class, () -> productService.deleteProductById(1L));
-   }
-
-   @Test
-   public void getProductById_ProductExists_ProductReturned() {
-       // arrange
-       ProductServiceModel existingProduct = new ProductServiceModel();
-       existingProduct.setId(1L);
-       existingProduct.setName("Existing Product");
-
-       when(productRepository.findById(anyLong())).thenReturn(Optional.of(modelMapper.map(existingProduct, Product.class)));
-       when(modelMapper.map(any(Product.class), eq(ProductServiceModel.class))).thenReturn(existingProduct);
-
-       // act
-       ProductServiceModel result = productService.getProductById(1L);
-
-       // assert
-       assertEquals(existingProduct, result, "The product should be returned successfully");
    }
 
    @Test

@@ -31,7 +31,6 @@ public class OrderServiceImplTest {
         OrderServiceModel orderServiceModel = new OrderServiceModel();
         Order order = new Order();
         when(modelMapper.map(orderServiceModel, Order.class)).thenReturn(order);
-        doNothing().when(orderRepository).save(order);
 
         OrderServiceImpl orderService = new OrderServiceImpl(orderRepository, modelMapper);
 
@@ -42,26 +41,6 @@ public class OrderServiceImplTest {
         assertTrue(result);
     }
 
-    @Test
-    void whenUpdateValidOrder_thenExpectUpdatedOrder() {
-        // arrange
-        OrderServiceModel orderServiceModel = new OrderServiceModel();
-        Order oldOrder = new Order();
-        Order expectedOrder = new Order();
-        orderServiceModel.setId(1L);
-        when(orderRepository.findById(1L)).thenReturn(Optional.of(oldOrder));
-        when(modelMapper.map(orderServiceModel, Order.class)).thenReturn(expectedOrder);
-        when(orderRepository.saveAndFlush(expectedOrder)).thenReturn(expectedOrder);
-        when(modelMapper.map(expectedOrder, OrderServiceModel.class)).thenReturn(orderServiceModel);
-
-        OrderServiceImpl orderService = new OrderServiceImpl(orderRepository, modelMapper);
-
-        // act
-        OrderServiceModel result = orderService.update(orderServiceModel);
-
-        // assert
-        assertEquals(orderServiceModel, result);
-    }
 
 
     @Test

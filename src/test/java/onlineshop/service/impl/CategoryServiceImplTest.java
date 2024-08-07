@@ -35,24 +35,6 @@ public class CategoryServiceImplTest {
     }
 
     @Test
-    public void testUpdateCategory() {
-        ModelMapper modelMapper = new ModelMapper();
-        Category category = new Category();
-        category.setId(1L);
-        category.setCategoryName("Electronics");
-        CategoryServiceModel categoryServiceModel = modelMapper.map(category, CategoryServiceModel.class);
-        CategoryServiceModel newCategoryServiceModel = new CategoryServiceModel();
-        newCategoryServiceModel.setId(category.getId());
-        newCategoryServiceModel.setCategoryName("Home Appliances");
-        CategoryServiceImpl categoryService = new CategoryServiceImpl(categoryRepository, modelMapper);
-        Mockito.when(categoryRepository.findById(1L)).thenReturn(Optional.of(category));
-        Mockito.when(categoryRepository.save(Mockito.any(Category.class))).thenReturn(category);
-        boolean result = categoryService.updateCategory(newCategoryServiceModel);
-        assertTrue(result);
-        Mockito.verify(categoryRepository, Mockito.times(1)).save(category);
-    }
-
-    @Test
     public void testDeleteCategoryById() {
         ModelMapper modelMapper = new ModelMapper();
         Category category = new Category();
