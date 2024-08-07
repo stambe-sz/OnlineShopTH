@@ -371,3 +371,8 @@ ol li ::marker{
 .lang-btn{
     margin: 20px;
 }
+.order-h1 {
+    color: blue;
+    text-align: center;
+    margin: 10px;
+}

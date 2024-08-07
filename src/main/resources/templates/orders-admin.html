@@ -32,6 +32,7 @@
                     <td th:text="*{o.updatedAt}"></td>
                     <td th:text="*{o.status}"></td>
                     <td th:text="*{o.note}"></td>
+                    <td th:text="*{o.userUsername}"></td>
                     <td>
                         <div th:each="prids : ${o.productIds}">
                             <span th:text="${prids}"></span>
