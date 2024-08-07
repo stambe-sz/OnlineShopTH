@@ -1,10 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/static/css/style2.css">
+<head th:replace="fragments/head2 :: head"></head>
+<body class="homePage">
+<header th:replace="fragments/navbar2::navbar"></header>
+<main>
+    <div class="orders-wrapper container">
+        <h1 class="order-h1" th:text="#{'ORDERS'}">Orders</h1>
+        <form th:action="@{/order/all}" th:method="get">
 
+
+            <table class="order-table">
+                <thead>
+                <tr>
+                    <th th:text="#{'NUMBER_OF_ORDER'}">numberOfOrder</th>
+                    <th th:text="#{'CREATED_AT'}">createdAt</th>
+                    <th th:text="#{'UPDATED_AT'}">updatedAt</th>
+                    <th th:text="#{'STATUS'}">status</th>
+                    <th th:text="#{'NOTE'}">note</th>
+                    <th th:text="#{'USER_USERNAME'}">userUsername</th>
+                    <th th:text="#{'PRODUCT_IDS'}">productIds</th>
+                </tr>
+                </thead>
+                <tbody th:each="o : ${allOrders}">
+                <tr class="cart-table-row">
+                    <td th:text="*{o.numberOfOrder}"></td>
+
+                    <td th:text="*{o.createdAt}"></td>
+                    <!--                    <td th:text="${#dates.format(o.createdAt,'dd-MM-yyyy HH:mm:ss')}"></td>-->
+                    <td th:text="*{o.updatedAt}"></td>
+                    <td th:text="*{o.status}"></td>
+                    <td th:text="*{o.note}"></td>
+                    <td>
+                        <div th:each="prids : ${o.productIds}">
+                            <span th:text="${prids}"></span>
+                        </div>
+                    </td>
+                    <!--                           th:href="@{/cart/remove-from-cart/{productId}(productId = ${p.getId()})}"-->
+
+                    <td><a type="button" class="cart-button"
+                           th:text="#{'REMOVE'}"
+                    >remove</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</main>
 </body>
 </html>

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import onlineshop.model.entity.CartItem;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -13,7 +14,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderAdminViewModel {
-    private String username;
-    private Double totalAmount;
-    private List<CartItem> cartItems;
+    private String numberOfOrder;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private String status;
+    private String note;
+    private String userUsername;
+    private List<String> productIds;
 }

@@ -5,6 +5,7 @@ import onlineshop.model.service.CartItemServiceModel;
 import onlineshop.model.service.OrderServiceModel;
 import onlineshop.model.service.ProductServiceModel;
 import onlineshop.model.service.UserServiceModel;
+import onlineshop.model.view.OrderAdminViewModel;
 import onlineshop.model.view.ProductViewModel;
 import onlineshop.model.view.UserViewModel;
 import onlineshop.service.CartService;
@@ -23,6 +24,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Controller
@@ -93,5 +95,15 @@ public class OrderController {
         user.getCart().getCartItems().clear();
         userService.saveUserToDb(user);
         return "redirect:/products";
+    }
+    @GetMapping("/all")
+    public ModelAndView getAllOrders(ModelAndView model) {
+        List<OrderServiceModel> all = orderService.getAll();
+        List<OrderAdminViewModel> allOrders = all.stream()
+                .map(e -> this.modelMapper.map(e, OrderAdminViewModel.class))
+                .collect(Collectors.toList());
+        model.addObject("allOrders", allOrders);
+        model.setViewName("orders-admin");
+        return model;
     }
 }

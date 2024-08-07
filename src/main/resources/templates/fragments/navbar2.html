@@ -70,6 +70,14 @@
                     <span class="text" th:text="#{'PRODUCT_ADD'}">Add Product</span>
                 </a>
             </li>
+            <li th:if="${#authorization.expression('hasAuthority(''ADMIN'')')}" class="list">
+                <a href="/order/all">
+                    <span class="icon">
+                        <ion-icon name="bag-check-outline"></ion-icon>
+                    </span>
+                    <span class="text" th:text="#{'ORDERS_ALL'}">all orders</span>
+                </a>
+            </li>
             <div class="indicator"></div>
             <div class="lang-btn">
                 <button type="button" th:text="#{switch-en}" onclick="window.location.href='http://localhost:8080/?localeData=en'"></button> <!-- 3 -->
