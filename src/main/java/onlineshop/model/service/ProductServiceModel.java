@@ -20,4 +20,6 @@ public class ProductServiceModel extends BaseServiceModel {
     private CategoryServiceModel category;
     private String productCondition;
     private List<ImageServiceModel> images;
+
+    private String photoUrl;
 }

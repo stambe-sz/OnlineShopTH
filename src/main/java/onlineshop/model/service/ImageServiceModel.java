@@ -1,6 +1,5 @@
 package onlineshop.model.service;
 
-import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

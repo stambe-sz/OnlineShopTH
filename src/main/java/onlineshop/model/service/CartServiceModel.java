@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -13,6 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 public class CartServiceModel extends BaseServiceModel{
     private String username;
-    private List<CartItemServiceModel> cartItems;
+    private List<CartItemServiceModel> cartItems = new ArrayList<>();
 
 }

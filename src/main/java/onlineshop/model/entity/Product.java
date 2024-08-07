@@ -39,4 +39,7 @@ public class Product extends BaseEntity {
 
     @Column(name = "order_quantity")
     private int orderQuantity;
+
+    @Column(name = "photo_url")
+    private String photoUrl;
 }
