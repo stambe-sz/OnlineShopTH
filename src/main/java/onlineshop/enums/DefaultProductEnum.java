@@ -16,7 +16,8 @@ public enum DefaultProductEnum {
             6.0,
             new CategoryServiceModel("food"),
             ProductConditionEnum.NEW.name(),
-            new ArrayList<ImageServiceModel>()));
+            new ArrayList<ImageServiceModel>(),
+            "http://..."));
 
     private ProductServiceModel product;
 

@@ -25,4 +25,5 @@ public class ProductViewModel extends BaseViewModel {
     private Category category;
     private String productCondition;
     private List<String> images;
+    private String photoUrl;
 }
