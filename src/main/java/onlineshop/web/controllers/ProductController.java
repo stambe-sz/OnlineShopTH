@@ -64,7 +64,7 @@ public class ProductController {
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @DeleteMapping("/delete/{productId}")
+    @GetMapping("/delete/{productId}")
     public String deleteProduct(@PathVariable("productId") Long productId) {
         productService.deleteProductById(productId);
         return "redirect:/products";
@@ -79,12 +79,6 @@ public class ProductController {
         modelAndView.setViewName("product-edit");
         return modelAndView;
     }
-
-//    @PostMapping("/edit/{id}")
-//    public String editProduct(@PathVariable Long id,@Valid ProductEditBindingModel productEditBindingModel) {
-//        productService.editProduct(modelMapper.map(productEditBindingModel,ProductServiceModel.class));
-//        return "redirect:edit";
-//    }
 
     @ModelAttribute
     public ProductAddBindingModel productAddBindingModel() {
