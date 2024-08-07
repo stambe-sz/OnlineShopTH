@@ -51,7 +51,6 @@ public class UserController {
                 userLoginBindingModel.getUsername(),
                 userLoginBindingModel.getPassword()
         );
-        System.out.println();
         try {
             Authentication authentication = authenticationManager.authenticate(token);
             SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -89,6 +88,7 @@ public class UserController {
     public UserRegisterBindingModel userRegisterBindingModel(){
         return new UserRegisterBindingModel();
     }
+
     @ModelAttribute
     public UserLoginBindingModel userLoginBindingModel(){
         return new UserLoginBindingModel();

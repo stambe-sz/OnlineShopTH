@@ -2,8 +2,8 @@ package onlineshop.web.controllers;
 
 import onlineshop.model.binding.ProductAddBindingModel;
 import onlineshop.model.service.ProductServiceModel;
-import onlineshop.service.ProductService;
 import onlineshop.model.view.ProductViewModel;
+import onlineshop.service.ProductService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
