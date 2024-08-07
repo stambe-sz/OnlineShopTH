@@ -70,7 +70,7 @@ public class OrderController {
         UserServiceModel user = userService.getUserByUsername(username);
         List<CartItemServiceModel> userCart = user.getCart().getCartItems();
         userCart.forEach(e -> {
-            ProductServiceModel foundProduct =productService.getProductById(e.getId());
+            ProductServiceModel foundProduct =productService.getProductById(e.getProductId());
             int newQuantity = foundProduct.getQuantity() - e.getQuantity();
             foundProduct.setQuantity(newQuantity);
             productService.editProduct(foundProduct);
@@ -92,6 +92,6 @@ public class OrderController {
         orderService.create(newOrder);
         user.getCart().getCartItems().clear();
         userService.saveUserToDb(user);
-        return "products";
+        return "redirect:/products";
     }
 }
